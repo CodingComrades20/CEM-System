@@ -42,19 +42,10 @@ navigate("/")
             onChange={(e)=>onInputChange(e)}/>
           </div>
           <div className='mb-3>'>
-            <label htmlFor="Name" className="form-lable">
-            Product Image
+            <label htmlFor="" className="form-lable">
+          Status
             </label>
-            <input type={"file"} className="form-control" multiple accept="image/*
-            "placeholder='Upload Image' name='image' value={image} 
-            onChange={(e)=>onInputChange(e)}/>
-          </div>
-
-          <div className='mb-3>'>
-            <label htmlFor="Category" className="form-lable">
-            Product Category
-            </label>
-            <input type={"text"} className="form-control" placeholder='Select Product category' name='category' value={category}
+            <input type={"text"} className="form-control" placeholder='Select status' name='status' value={status}
             onChange={(e)=>onInputChange(e)}/>
               <select>
                 <option> </option>
@@ -62,40 +53,57 @@ navigate("/")
           </div>
 
           <div className='mb-3>'>
-            <label htmlFor="Quantity" className="form-lable">
-            Quantity
+            <label htmlFor="DueDate" className="form-lable">
+            Due Date
             </label>
-            <input type={"text"} className="form-control" placeholder='Enter quantity' name='quantity' value={quantity}
+            <input type={"date"} className="form-control" placeholder='Due Date' name='dueDate' value={dueDate}
             onChange={(e)=>onInputChange(e)}/>
           </div>
           
           <div className='mb-3>'>
-            <label htmlFor="Price" className="form-lable">
-            Price
+            <label htmlFor="Amount" className="form-lable">
+            Amount
             </label>
-            <input type={"text"} className="form-control" placeholder='Enter price' name='price' value={price}
+            <input type={"text"} className="form-control" placeholder='Amount' name='amount' value={amount}
             onChange={(e)=>onInputChange(e)}/>
           </div>
 
           <div className='mb-3>'>
-            <label htmlFor="Price" className="form-lable">
-            Manufacture date
+            <label htmlFor="PaymentMethod" className="form-lable">
+            Payment Method
             </label>
-            <input type={"date"} className="form-control" placeholder='Enter manufacture date' name='manufactureDate' value={manufactureDate}
+            <input type={"text"} className="form-control" placeholder='Payment Method' name='paymentMethod' value={paymentMethod}
             onChange={(e)=>onInputChange(e)}/>
           </div>
                  
           <div className='mb-3>'>
-            <label htmlFor="Price" className="form-lable">
-           Expiry date
+            <label htmlFor="PaymentDate" className="form-lable">
+           Payment date
             </label>
-            <input type={"date"} className="form-control" placeholder=' Expiry date' name='expiryDate' value={expiryDate}
+            <input type={"date"} className="form-control" placeholder=' Payment date' name='paymentDate' value={paymentDate}
             onChange={(e)=>onInputChange(e)}/>
           </div>
+          
+          <div className='mb-3>'>
+            <label htmlFor="DueAmount" className="form-lable">
+            Due Amount
+            </label>
+            <input type={"text"} className="form-control" placeholder='Due Amount' name='dueAmount' value={dueAmount}
+            onChange={(e)=>onInputChange(e)}/>
+          </div>
+          <div className='mb-3>'>
+            <label htmlFor="Suppier" className="form-lable">
+            Supplier
+            </label>
+            <input type={"text"} className="form-control" placeholder='Supplier' name='supplier' value={supplier}
+            onChange={(e)=>onInputChange(e)}/>
+          </div>
+
           <div className="text-center m-4">
           <button type='submit' className='btn btn-outline-primary mx-2'>Save</button>
           <Link  className='btn btn-outline-danger mx-2 ' to="/">Cancel</Link>
           </div>
+
           </form>
 
 
