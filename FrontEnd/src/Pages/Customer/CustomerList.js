@@ -3,22 +3,22 @@ import axios from "axios";
 import { Link, useParams } from "react-router-dom";
 
 export default function Home() {
-  const [users, setUsers] = useState([]);
+  const [customers, setCustomers] = useState([]);
 
   const { id } = useParams();
 
   useEffect(() => {
-    loadUsers();
+    loadCustomers();
   }, []);
 
-  const loadUsers = async () => {
-    const result = await axios.get("http://localhost:8080/users");
-    setUsers(result.data);
+  const loadCustomers = async () => {
+    const result = await axios.get("http://localhost:8080/customers");
+    setCustomers(result.data);
   };
 
-  const deleteUser = async (id) => {
-    await axios.delete(`http://localhost:8080/user/${id}`);
-    loadUsers();
+  const deleteCustomer = async (id) => {
+    await axios.delete(`http://localhost:8080/customer/${id}`);
+    loadCustomers();
   };
 
   return (
@@ -36,32 +36,32 @@ export default function Home() {
             </tr>
           </thead>
           <tbody>
-            {users.map((user, index) => (
+            {customers.map((customer, index) => (
               <tr>
                 <th scope="row" key={index}>
                   {index + 1}
                 </th>
-                <td>{user.name}</td>
-                <td>{user.address}</td>
-                <td>{user.cno}</td>
-                <td>{user.email}</td>
+                <td>{customer.name}</td>
+                <td>{customer.address}</td>
+                <td>{customer.cno}</td>
+                <td>{customer.email}</td>
                 
                 <td>
                   <Link
                     className="btn btn-primary mx-2"
-                    to={`/viewcustomer/${user.id}`}
+                    to={`/viewcustomer/${customer.id}`}
                   >
                     View
                   </Link>
                   <Link
                     className="btn btn-outline-primary mx-2"
-                    to={`/editcustomer/${user.id}`}
+                    to={`/editcustomer/${customer.id}`}
                   >
                     Edit
                   </Link>
                   <button
                     className="btn btn-danger mx-2"
-                    onClick={() => deleteUser(user.id)}
+                    onClick={() => deleteCustomer(customer.id)}
                   >
                     Delete
                   </button>
