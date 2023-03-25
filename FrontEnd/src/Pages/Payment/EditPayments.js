@@ -32,11 +32,11 @@ useEffect(()=>{
 
 const onSubmit=async(e)=>{
 e.preventDefault();
-await axios.put(`http://localhost:8080/product/${id}`,payment) 
+await axios.put(`http://localhost:8080/payment/${id}`,payment) 
 navigate("/")
 };
  const loadPayment=async()=>{
-    const result=await axios.get(`http://localhost:8080/product/${id}`)
+    const result=await axios.get(`http://localhost:8080/payment/${id}`)
     setPayment(result.data)
 
  }
