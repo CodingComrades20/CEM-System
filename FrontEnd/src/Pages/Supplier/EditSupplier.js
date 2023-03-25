@@ -1,11 +1,13 @@
 import axios from "axios";
-import React, { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import { Link, useNavigate, useParams } from "react-router-dom";
 
-export default function AddCustomer() {
+export default function EditSupplier() {
   let navigate = useNavigate();
 
-  const [customer, setCustomer] = useState({
+  const { id } = useParams();
+
+  const [supplier, setSupplier] = useState({
     name: "",
     address: "",
     cno: "",
@@ -13,23 +15,32 @@ export default function AddCustomer() {
     
   });
 
-  const { name, address, cno, email } = customer;
+  const { name, address, cno, email } = supplier;
 
   const onInputChange = (e) => {
-    setCustomer({ ...customer, [e.target.name]: e.target.value });
+    setSupplier({ ...supplier, [e.target.name]: e.target.value });
   };
+
+  useEffect(() => {
+    loadSupplier();
+  }, []);
 
   const onSubmit = async (e) => {
     e.preventDefault();
-    await axios.post("http://localhost:8080/customer", customer);
+    await axios.put(`http://localhost:8080/supplier/${id}`, supplier);
     navigate("/");
+  };
+
+  const loadSupplier = async () => {
+    const result = await axios.get(`http://localhost:8080/supplier/${id}`);
+    setSupplier(result.data);
   };
 
   return (
     <div className="container">
       <div className="row">
         <div className="col-md-6 offset-md-3 border rounded p-4 mt-2 shadow">
-          <h2 className="text-center m-4"> Add New Customer </h2>
+          <h2 className="text-center m-4">Edit Supplier's Details</h2>
 
           <form onSubmit={(e) => onSubmit(e)}>
             <div className="mb-3">
@@ -39,7 +50,7 @@ export default function AddCustomer() {
               <input
                 type={"text"}
                 className="form-control"
-                placeholder="Enter Customer's Name"
+                placeholder="Enter Supplier's Name"
                 name="name"
                 value={name}
                 onChange={(e) => onInputChange(e)}
@@ -47,12 +58,12 @@ export default function AddCustomer() {
             </div>
             <div className="mb-3">
               <label htmlFor="Address" className="form-label">
-               Address
+                Address
               </label>
               <input
                 type={"text"}
                 className="form-control"
-                placeholder="Enter Customer's Address"
+                placeholder="Enter Supplier's Address"
                 name="address"
                 value={address}
                 onChange={(e) => onInputChange(e)}
@@ -65,7 +76,7 @@ export default function AddCustomer() {
               <input
                 type={"text"}
                 className="form-control"
-                placeholder="Enter Customer's Contact Number"
+                placeholder="Enter Supplier's Contact Number"
                 name="cno"
                 value={cno}
                 onChange={(e) => onInputChange(e)}
@@ -78,14 +89,12 @@ export default function AddCustomer() {
               <input
                 type={"text"}
                 className="form-control"
-                placeholder="Enter Customer's e-mail id"
+                placeholder="Enter Supplier's e-mail id"
                 name="email"
                 value={email}
                 onChange={(e) => onInputChange(e)}
               />
             </div>
-            
-            
             <button type="submit" className="btn btn-outline-primary">
               Submit
             </button>

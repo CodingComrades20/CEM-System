@@ -10,6 +10,10 @@ import AddCust from "./Pages/Customer/AddCustomer"
 import EditCust from "./Pages/Customer/EditCustomer"
 import ViewCust from "./Pages/Customer/ViewCustomer"
 import CustList from "./Pages/Customer/CustomerList"
+import AddSup from "./Pages/Supplier/AddSupplier"
+import EditSup from "./Pages/Supplier/EditSupplier"
+import ViewSup from "./Pages/Supplier/ViewSupplier"
+import SupList from "./Pages/Supplier/SupplierList"
 import AddPro from "./Pages/Product/AddProduct"
 import EditPro from "./Pages/Product/EditProduct"
 import ProList from "./Pages/Product/ProductList"
@@ -33,6 +37,10 @@ function App() {
           <Route exact path="/editCust/:id" element={<EditCust />} />
           <Route exact path="/addCust/:id" element={<AddCust />} />
           <Route exact path="/cust/:id" element={<CustList />} />
+          <Route exact path="/viewSup/:id" element={<ViewSup />} />
+          <Route exact path="/editSup/:id" element={<EditSup />} />
+          <Route exact path="/addSup/:id" element={<AddSup />} />
+          <Route exact path="/Sup/:id" element={<SupList />} />
           <Route exact path="/product" element={<ProList/>}/>
           <Route exact path="/addproduct" element={<AddPro/>}/>
           <Route exact path="/editproduct/:id" element={<EditPro/>}/>    
