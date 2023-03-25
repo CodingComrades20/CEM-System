@@ -3,7 +3,7 @@ import React, { useEffect,useState } from "react";
 import { Link, useParams } from "react-router-dom";
 
 export default function ViewCustomer() {
-  const [user, setUser] = useState({
+  const [customer, setCustomer] = useState({
     name: "",
     address: "",
     email: "",
@@ -13,12 +13,12 @@ export default function ViewCustomer() {
   const { id } = useParams();
 
   useEffect(() => {
-    loadUser();
+    loadCustomer();
   }, []);
 
-  const loadUser = async () => {
-    const result = await axios.get(`http://localhost:8080/user/${id}`);
-    setUser(result.data);
+  const loadCustomer = async () => {
+    const result = await axios.get(`http://localhost:8080/customer/${id}`);
+    setCustomer(result.data);
   };
 
   return (
@@ -29,23 +29,23 @@ export default function ViewCustomer() {
 
           <div className="card">
             <div className="card-header">
-              Details of user id : {user.id}
+              Details of user id : {customer.id}
               <ul className="list-group list-group-flush">
                 <li className="list-group-item">
                   <b>Name:</b>
-                  {user.name}
+                  {customer.name}
                 </li>
                 <li className="list-group-item">
                   <b>Address:</b>
-                  {user.address}
+                  {customer.address}
                 </li>
                 <li className="list-group-item">
                   <b>Contact Number:</b>
-                  {user.cno}
+                  {customer.cno}
                 </li>
                 <li className="list-group-item">
                   <b>Email:</b>
-                  {user.email}
+                  {customer.email}
                 </li>
               </ul>
             </div>

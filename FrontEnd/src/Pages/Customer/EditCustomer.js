@@ -7,7 +7,7 @@ export default function EditCustomer() {
 
   const { id } = useParams();
 
-  const [user, setUser] = useState({
+  const [customer, setCustomer] = useState({
     name: "",
     address: "",
     cno: "",
@@ -15,25 +15,25 @@ export default function EditCustomer() {
     
   });
 
-  const { name, address, cno, email } = user;
+  const { name, address, cno, email } = customer;
 
   const onInputChange = (e) => {
-    setUser({ ...user, [e.target.name]: e.target.value });
+    setCustomer({ ...customer, [e.target.name]: e.target.value });
   };
 
   useEffect(() => {
-    loadUser();
+    loadCustomer();
   }, []);
 
   const onSubmit = async (e) => {
     e.preventDefault();
-    await axios.put(`http://localhost:8080/user/${id}`, user);
+    await axios.put(`http://localhost:8080/customer/${id}`, customer);
     navigate("/");
   };
 
-  const loadUser = async () => {
-    const result = await axios.get(`http://localhost:8080/user/${id}`);
-    setUser(result.data);
+  const loadCustomer = async () => {
+    const result = await axios.get(`http://localhost:8080/customer/${id}`);
+    setCustomer(result.data);
   };
 
   return (
