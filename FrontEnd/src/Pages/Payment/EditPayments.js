@@ -113,7 +113,7 @@ navigate("/")
 
           <div className="text-center m-4">
           <button type='submit' className='btn btn-outline-primary mx-2'>Save</button>
-          <Link  className='btn btn-outline-danger mx-2 ' to="/">Cancel</Link>
+          <Link  className='btn btn-outline-danger mx-2 ' to="/payment">Cancel</Link>
           </div>
 
 

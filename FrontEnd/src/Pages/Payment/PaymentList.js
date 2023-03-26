@@ -1,21 +1,21 @@
 import React, { useEffect,useState } from "react";
 import axios from "axios";
 import { Link} from 'react-router-dom';
- function PaymentHome() {
-  const[payments,setPayments]=useState([])
+ function Payment() {
+  const[payment,setPayment]=useState([])
   useEffect(()=>{
-    loadPayments();
+    loadPayment();
   },[]);
 
 
-  const loadPayments=async()=>{
+  const loadPayment=async()=>{
     const result=await axios.get("http://localhost:8080/payment")
-    setPayments(result.data);
+    setPayment(result.data);
   };
 
   const deletePayment=async(id)=>{
   await axios.delete(`http://localhost:8080/payment/${id}`)
-  loadPayments()
+  loadPayment()
   } 
 
 
@@ -32,10 +32,6 @@ import { Link} from 'react-router-dom';
       <th scope="col">Status</th>
       <th scope="col">Due Date</th>
       <th scope="col">Amount</th>
-      <th scope="col">PaymentMethod</th>
-      <th scope="col">Payment Date</th>
-      <th scope="col">Due Amount</th>
-      <th scope="col">Supplier</th>
       <th scope="col">Action</th>
     </tr>
   </thead>
@@ -43,25 +39,28 @@ import { Link} from 'react-router-dom';
 
       {
 
-        payments.map((payments,index)=>(
+        payment.map((payment,index)=>(
                 <tr>
             <th scope="row" key={index}>{index+1}</th>
-            <td>{payments.invoiceNo}</td>
-            <td>{payments.status}</td>
-            <td>{payments.dueDate}</td>
-            <td>{payments.amount}</td>
-            <td>{payments.paymentMethod}</td>
-            <td>{payments.paymentDate}</td>
-            <td>{payments.dueAmount}</td>
-            <td>{payments.supplier}</td>
-            <td>{payments.action}</td>
+            <td>{payment.invoiceNo}</td>
+            <td>{payment.status}</td>
+            <td>{payment.dueDate}</td>
+            <td>{payment.amount}</td>
+            
+           
+            
             <td>
-                  
+            <Link
+                    className="btn btn-primary mx-2"
+                    to={`/viewpayment/${payment.id}`}
+                  >
+                    View
+                  </Link>
                   <Link className="btn btn-outline-primary mx-2"
-              to={`/editpayment/${payments.id}`}
+              to={`/editPayment/${payment.id}`}
                   >Edit</Link>
                   <button className="btn btn-danger mx-2"
-                  onClick={()=>deletePayment(payments.id)}>Delete</button>
+                  onClick={()=>deletePayment(payment.id)}>Delete</button>
 
             </td>
             
@@ -76,4 +75,4 @@ import { Link} from 'react-router-dom';
   )
 }
 
-export default PaymentHome;
+export default Payment;

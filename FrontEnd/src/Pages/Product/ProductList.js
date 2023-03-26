@@ -1,11 +1,8 @@
 import React, { useEffect,useState } from "react";
 import axios from "axios";
-import { Link, useParams } from 'react-router-dom';
- function ProductHome() {
+import { Link} from 'react-router-dom';
+ function Product() {
   const[products,setProducts]=useState([])
-  const {id}= useParams()
-
-
   useEffect(()=>{
     loadProducts();
   },[]);
@@ -44,7 +41,6 @@ import { Link, useParams } from 'react-router-dom';
   <tbody>
 
       {
-
         products.map((products,index)=>(
                 <tr>
             <th scope="row" key={index}>{index+1}</th>
@@ -58,7 +54,7 @@ import { Link, useParams } from 'react-router-dom';
             <td>
                   
                   <Link className="btn btn-outline-primary mx-2"
-              to={`/editproduct/${products.id}`}
+              to={`/editProduct/${products.id}`}
                   >Edit</Link>
                   <button className="btn btn-danger mx-2"
                   onClick={()=>deleteProduct(products.id)}>Delete</button>
@@ -76,4 +72,4 @@ import { Link, useParams } from 'react-router-dom';
   )
 }
 
-export default ProductHome;
+export default Product;
