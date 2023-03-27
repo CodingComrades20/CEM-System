@@ -56,9 +56,6 @@ import { Link} from 'react-router-dom';
                   >
                     View
                   </Link>
-                  <Link className="btn btn-outline-primary mx-2"
-              to={`/editPayment/${payment.id}`}
-                  >Edit</Link>
                   <button className="btn btn-danger mx-2"
                   onClick={()=>deletePayment(payment.id)}>Delete</button>
 

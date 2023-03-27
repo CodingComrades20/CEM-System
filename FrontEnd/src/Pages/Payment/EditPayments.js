@@ -7,10 +7,7 @@ export default function EditPayment (){
 
   const {id}=useParams()
  const[payment,setPayment]=useState({
- invoiceNo:"",
   status:"",
-  dueDate:"",
-  Amount:"",
   paymentMethod:"",
   paymentDate:"",
   dueAmount:"",
@@ -18,7 +15,7 @@ export default function EditPayment (){
  })
 
 
-const{invoiceNo,status,dueDate,amount,paymentMethod,paymentDate,dueAmount,supplier}=payment;
+const{status,paymentMethod,paymentDate,dueAmount,supplier}=payment;
 
 const onInputChange=(e)=>{
 setPayment({...payment,[e.target.name]:e.target.value})
@@ -49,13 +46,6 @@ navigate("/")
           <h2 className='text-center m-4'>Edit Payment</h2>
           <form onSubmit={(e=>onSubmit(e))}>
           <div className='mb-3>'>
-            <label htmlFor="Name" className="form-lable">
-            Invoice Number
-            </label>
-            <input type={"text"} className="form-control" placeholder='Enter invoice number' name='invoiceNo' value={invoiceNo} 
-            onChange={(e)=>onInputChange(e)}/>
-          </div>
-          <div className='mb-3>'>
             <label htmlFor="" className="form-lable">
           Status
             </label>
@@ -65,24 +55,7 @@ navigate("/")
                 <option> </option>
               </select>
           </div>
-
-          <div className='mb-3>'>
-            <label htmlFor="DueDate" className="form-lable">
-            Due Date
-            </label>
-            <input type={"date"} className="form-control" placeholder='Due Date' name='dueDate' value={dueDate}
-            onChange={(e)=>onInputChange(e)}/>
-          </div>
-          
-          <div className='mb-3>'>
-            <label htmlFor="Amount" className="form-lable">
-            Amount
-            </label>
-            <input type={"text"} className="form-control" placeholder='Amount' name='amount' value={amount}
-            onChange={(e)=>onInputChange(e)}/>
-          </div>
-
-          <div className='mb-3>'>
+       <div className='mb-3>'>
             <label htmlFor="PaymentMethod" className="form-lable">
             Payment Method
             </label>
@@ -113,7 +86,7 @@ navigate("/")
 
           <div className="text-center m-4">
           <button type='submit' className='btn btn-outline-primary mx-2'>Save</button>
-          <Link  className='btn btn-outline-danger mx-2 ' to="/payment">Cancel</Link>
+          <Link  className='btn btn-outline-danger mx-2 ' to={`/viewpayment/${payment.id}`}>Cancel</Link>
           </div>
 
 

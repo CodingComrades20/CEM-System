@@ -10,8 +10,8 @@ export default function ViewPayment() {
     supplier:"",
   });
 
-  const { id } = useParams();
 
+  const { id } = useParams();
   useEffect(() => {
     loadPayment();
   }, []);
@@ -50,9 +50,12 @@ export default function ViewPayment() {
               </ul>
             </div>
           </div>
-          <Link className="btn btn-primary my-2" to={"/payment"}>
+          <Link className="btn btn-outline-primary my-2" to={"/payment"}>
             Back to PaymentList
           </Link>
+          <Link className="btn btn-outline-danger mx-2"
+              to={`/editPayment/${payment.id}`}
+                  >Edit</Link>
         </div>
       </div>
     </div>
