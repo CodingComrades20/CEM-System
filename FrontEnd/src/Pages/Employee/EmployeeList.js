@@ -2,23 +2,23 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { Link, useParams } from "react-router-dom";
 
-export default function Home() {
-  const [users, setUsers] = useState([]);
+export default function EmployeeList() {
+  const [employees, setEmployees] = useState([]);
 
   const { id } = useParams();
 
   useEffect(() => {
-    loadUsers();
+    loadEmployees();
   }, []);
 
-  const loadUsers = async () => {
-    const result = await axios.get("http://localhost:8080/users");
-    setUsers(result.data);
+  const loadEmployees = async () => {
+    const result = await axios.get("http://localhost:8080/employees");
+    setEmployees(result.data);
   };
 
-  const deleteUser = async (id) => {
-    await axios.delete(`http://localhost:8080/user/${id}`);
-    loadUsers();
+  const deleteEmployee = async (id) => {
+    await axios.delete(`http://localhost:8080/employee/${id}`);
+    loadEmployees();
   };
 
   return (
@@ -27,38 +27,41 @@ export default function Home() {
         <table className="table border shadow">
           <thead>
             <tr>
-              <th scope="col">Emloyee id</th>
-              <th scope="col">Employee Name</th>
-              <th scope="col">Department</th>
-              <th scope="col">Email</th>
+              <th scope="col">S.N</th>
+              <th scope="col">FullName</th>
+              <th scope="col">Deparmnet</th>
+              <th scope="col">Position</th>
+              <th scope="col">Contact No</th>
               <th scope="col">Action</th>
             </tr>
           </thead>
           <tbody>
-            {users.map((user, index) => (
+            {employees.map((employee, index) => (
               <tr>
                 <th scope="row" key={index}>
                   {index + 1}
                 </th>
-                <td>{user.name}</td>
-                <td>{user.username}</td>
-                <td>{user.email}</td>
+                <td>{employee.fullname}</td>
+                <td>{employee.department}</td>
+                <td>{employee.position}</td>
+                <td>{employee.contactno}</td>
+               
                 <td>
                   <Link
                     className="btn btn-primary mx-2"
-                    to={`/viewEmp/${user.id}`}
+                    to={`/viewemployee/${employee.id}`}
                   >
                     View
                   </Link>
                   <Link
                     className="btn btn-outline-primary mx-2"
-                    to={`/editEmp/${user.id}`}
+                    to={`/editemployee/${employee.id}`}
                   >
                     Edit
                   </Link>
                   <button
                     className="btn btn-danger mx-2"
-                    onClick={() => deleteUser(user.id)}
+                    onClick={() => deleteEmployee(employee.id)}
                   >
                     Delete
                   </button>

@@ -2,22 +2,23 @@ import axios from "axios";
 import React, { useEffect,useState } from "react";
 import { Link, useParams } from "react-router-dom";
 
-export default function ViewUser() {
-  const [user, setUser] = useState({
-    name: "",
-    username: "",
-    email: "",
+export default function ViewEmployee() {
+  const [employee, setEmployee] = useState({
+    fullname: "",
+    department: "",
+    position: "",
+    contactno:""
   });
 
   const { id } = useParams();
 
   useEffect(() => {
-    loadUser();
+    loadEmployee();
   }, []);
 
-  const loadUser = async () => {
-    const result = await axios.get(`http://localhost:8080/user/${id}`);
-    setUser(result.data);
+  const loadEmployee = async () => {
+    const result = await axios.get(`http://localhost:8080/employee/${id}`);
+    setEmployee(result.data);
   };
 
   return (
@@ -28,19 +29,23 @@ export default function ViewUser() {
 
           <div className="card">
             <div className="card-header">
-              Details of use  r id : {user.id}
+              Details of Employee id : {employee.id}
               <ul className="list-group list-group-flush">
                 <li className="list-group-item">
-                  <b>Employee Name:</b>
-                  {user.name}
+                  <b>Name:</b>
+                  {employee.fullname}
                 </li>
                 <li className="list-group-item">
                   <b>Department:</b>
-                  {user.username}
+                  {employee.department}
                 </li>
                 <li className="list-group-item">
-                  <b>Email:</b>
-                  {user.email}
+                  <b>Position:</b>
+                  {employee.position}
+                </li>
+                <li className="list-group-item">
+                  <b>Contact No:</b>
+                  {employee.contactno}
                 </li>
               </ul>
             </div>
