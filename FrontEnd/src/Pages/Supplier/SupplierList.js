@@ -17,8 +17,11 @@ export default function Supplier() {
   };
 
   const deleteSupplier = async (id) => {
-    await axios.delete(`http://localhost:8080/supplier/${id}`);
-    loadSuppliers();
+    const confirmed = window.confirm('Are you sure you want to delete this customer?');
+    if (confirmed) {
+      await axios.delete(`http://localhost:8080/supplier/${id}`);
+      loadSuppliers();
+    }
   };
 
   return (
