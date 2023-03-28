@@ -50,7 +50,7 @@ export default function ViewCustomer() {
               </ul>
             </div>
           </div>
-          <Link className="btn btn-primary my-2" to={"/"}>
+          <Link className="btn btn-primary my-2" to={"/customerlist"}>
             Back to Home
           </Link>
         </div>

@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { Link, useParams } from "react-router-dom";
 
-export default function Home() {
+export default function CustomerList() {
   const [customers, setCustomers] = useState([]);
 
   const { id } = useParams();
