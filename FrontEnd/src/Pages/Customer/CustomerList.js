@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { Link, useParams } from "react-router-dom";
 
-export default function Home() {
+export default function CustomerList() {
   const [customers, setCustomers] = useState([]);
 
   const { id } = useParams();
@@ -17,8 +17,11 @@ export default function Home() {
   };
 
   const deleteCustomer = async (id) => {
+    const confirmed = window.confirm('Are you sure you want to delete this customer?');
+    if (confirmed) { 
     await axios.delete(`http://localhost:8080/customer/${id}`);
     loadCustomers();
+    }
   };
 
   return (

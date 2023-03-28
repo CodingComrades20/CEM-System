@@ -22,13 +22,13 @@ export default function AddCustomer() {
   const onSubmit = async (e) => {
     e.preventDefault();
     await axios.post("http://localhost:8080/customer", customer);
-    navigate("/");
+    navigate("/customerlist");
   };
 
   return (
     <div className="container">
       <div className="row">
-        <div className="col-md-6 offset-md-3 border rounded p-4 mt-2 shadow">
+        <div className="col-md-6 offset-md-3 border rounded p-2 mt-4 shadow">
           <h2 className="text-center m-4"> Add New Customer </h2>
 
           <form onSubmit={(e) => onSubmit(e)}>
@@ -71,7 +71,7 @@ export default function AddCustomer() {
                 onChange={(e) => onInputChange(e)}
               />
             </div>
-            <div className="mb-3">
+            <div className="mb-5">
               <label htmlFor="Email" className="form-label">
                 E-mail
               </label>
@@ -86,10 +86,10 @@ export default function AddCustomer() {
             </div>
             
             
-            <button type="submit" className="btn btn-outline-primary">
-              Submit
+            <button type="submit" className="btn btn-outline-primary mx-3">
+              Submit     
             </button>
-            <Link className="btn btn-outline-danger mx-2" to="/">
+            <Link className="btn btn-outline-danger mx-3" to="/customerlist">
               Cancel
             </Link>
           </form>

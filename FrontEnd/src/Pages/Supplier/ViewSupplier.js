@@ -50,7 +50,7 @@ export default function ViewSupplier() {
               </ul>
             </div>
           </div>
-          <Link className="btn btn-primary my-2" to={"/"}>
+          <Link className="btn btn-primary my-2" to={"/supplierist"}>
             Back to Home
           </Link>
         </div>

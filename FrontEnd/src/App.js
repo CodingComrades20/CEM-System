@@ -6,14 +6,14 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import AddEmp from "./Pages/Employee/AddEmployee";
 import EditEmp from "./Pages/Employee/EditEmployee";
 import ViewEmp from "./Pages/Employee/ViewEmployee";
-import AddCust from "./Pages/Customer/AddCustomer"
-import EditCust from "./Pages/Customer/EditCustomer"
-import ViewCust from "./Pages/Customer/ViewCustomer"
-import CustList from "./Pages/Customer/CustomerList"
-import AddSup from "./Pages/Supplier/AddSupplier"
-import EditSup from "./Pages/Supplier/EditSupplier"
-import ViewSup from "./Pages/Supplier/ViewSupplier"
-import SupList from "./Pages/Supplier/SupplierList"
+import AddCustomer from "./Pages/Customer/AddCustomer"
+import EditCustomer from "./Pages/Customer/EditCustomer"
+import ViewCustomer from "./Pages/Customer/ViewCustomer"
+import CustomerList from "./Pages/Customer/CustomerList"
+import AddSupplier from "./Pages/Supplier/AddSupplier"
+import EditSupplier from "./Pages/Supplier/EditSupplier"
+import ViewSupplier from "./Pages/Supplier/ViewSupplier"
+import SupplierList from "./Pages/Supplier/SupplierList"
 import AddPro from "./Pages/Product/AddProduct"
 import EditPro from "./Pages/Product/EditProduct"
 import ProList from "./Pages/Product/ProductList"
@@ -33,14 +33,16 @@ function App() {
           <Route exact path="/addEmp" element={<AddEmp />} />
           <Route exact path="/editEmp/:id" element={<EditEmp />} />
           <Route exact path="/viewEmp/:id" element={<ViewEmp />} />
-          <Route exact path="/viewCust/:id" element={<ViewCust />} />
-          <Route exact path="/editCust/:id" element={<EditCust />} />
-          <Route exact path="/addCust/:id" element={<AddCust />} />
-          <Route exact path="/cust/:id" element={<CustList />} />
-          <Route exact path="/viewSup/:id" element={<ViewSup />} />
-          <Route exact path="/editSup/:id" element={<EditSup />} />
-          <Route exact path="/addSup/:id" element={<AddSup />} />
-          <Route exact path="/Sup/:id" element={<SupList />} />
+          
+          <Route exact path="/viewcustomer/:id" element={<ViewCustomer />} />
+          <Route exact path="/editcustomer/:id" element={<EditCustomer />} />
+          <Route exact path="/addcustomer" element={<AddCustomer />} />
+          <Route exact path="/customerlist/" element={<CustomerList />} />
+          <Route exact path="/viewsupplier/:id" element={<ViewSupplier />} />
+          <Route exact path="/editsupplier/:id" element={<EditSupplier />} />
+          <Route exact path="/addsupplier/" element={<AddSupplier />} />
+          <Route exact path="/supplierlist/" element={<SupplierList />} />
+
           <Route exact path="/product" element={<ProList/>}/>
           <Route exact path="/addproduct" element={<AddPro/>}/>
           <Route exact path="/editproduct/:id" element={<EditPro/>}/>    
