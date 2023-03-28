@@ -28,7 +28,7 @@ export default function EditSupplier() {
   const onSubmit = async (e) => {
     e.preventDefault();
     await axios.put(`http://localhost:8080/supplier/${id}`, supplier);
-    navigate("/");
+    navigate("/supplierlist");
   };
 
   const loadSupplier = async () => {
@@ -98,7 +98,7 @@ export default function EditSupplier() {
             <button type="submit" className="btn btn-outline-primary">
               Submit
             </button>
-            <Link className="btn btn-outline-danger mx-2" to="/">
+            <Link className="btn btn-outline-danger mx-2" to="/supplierlist">
               Cancel
             </Link>
           </form>
