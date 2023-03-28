@@ -29,10 +29,10 @@ function App() {
         <Navbar />
 
         <Routes>
-          <Route exact path="/emp" element={<EmpList />} />
-          <Route exact path="/addEmp" element={<AddEmp />} />
-          <Route exact path="/editEmp/:id" element={<EditEmp />} />
-          <Route exact path="/viewEmp/:id" element={<ViewEmp />} />
+          <Route exact path="/employee" element={<EmpList />} />
+          <Route exact path="/addEmployee" element={<AddEmp />} />
+          <Route exact path="/editEmployee/:id" element={<EditEmp />} />
+          <Route exact path="/viewEmployee/:id" element={<ViewEmp />} />
           
           <Route exact path="/viewcustomer/:id" element={<ViewCustomer />} />
           <Route exact path="/editcustomer/:id" element={<EditCustomer />} />
