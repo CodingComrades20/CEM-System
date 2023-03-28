@@ -33,7 +33,7 @@ export default function AddEmployee() {
           <form onSubmit={(e) => onSubmit(e)}>
             <div className="mb-3">
               <label htmlFor="Fullname" className="form-label">
-                Full Namee
+                Full Name
               </label>
               <input
                 type={"text"}
