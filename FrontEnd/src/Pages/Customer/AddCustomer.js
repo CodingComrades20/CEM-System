@@ -90,7 +90,7 @@ export default function AddCustomer() {
               Submit     
             </button>
             <Link className="btn btn-outline-danger mx-3" to="/customerlist">
-              Cance
+              Cancel
             </Link>
           </form>
         </div>
