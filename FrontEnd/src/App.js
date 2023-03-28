@@ -1,11 +1,7 @@
 import "./App.css";
 import "../node_modules/bootstrap/dist/css/bootstrap.min.css";
 import Navbar from "./layout/Navbar";
-import EmpList from "./Pages/Employee/EmployeeList";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import AddEmp from "./Pages/Employee/AddEmployee";
-import EditEmp from "./Pages/Employee/EditEmployee";
-import ViewEmp from "./Pages/Employee/ViewEmployee";
 import AddCust from "./Pages/Customer/AddCustomer"
 import EditCust from "./Pages/Customer/EditCustomer"
 import ViewCust from "./Pages/Customer/ViewCustomer"
@@ -17,7 +13,10 @@ import AddPay from "./Pages/Payment/AddPayments"
 import EditPay from "./Pages/Payment/EditPayments"
 import ViewPay from "./Pages/Payment/ViewPayments"
 import PaymentList from "./Pages/Payment/PaymentList"
-
+import AddEmployee from "./Pages/Employee/AddEmployee";
+import EditEmployee from "./Pages/Employee/EditEmployee";
+import ViewEmployee from "./Pages/Employee/ViewEmployee";
+import EmployeeList from "./Pages/Employee/EmployeeList";
 function App() {
   return (
     <div className="App">
@@ -25,10 +24,10 @@ function App() {
         <Navbar />
 
         <Routes>
-          <Route exact path="/emp" element={<EmpList />} />
-          <Route exact path="/addEmp" element={<AddEmp />} />
-          <Route exact path="/editEmp/:id" element={<EditEmp />} />
-          <Route exact path="/viewEmp/:id" element={<ViewEmp />} />
+        <Route exact path="/employeelist" element={<EmployeeList />} />
+          <Route exact path="/addemployee" element={<AddEmployee />} />
+          <Route exact path="/editemployee/:id" element={<EditEmployee />} />
+          <Route exact path="/viewemployee/:id" element={<ViewEmployee />} />
           <Route exact path="/viewCust/:id" element={<ViewCust />} />
           <Route exact path="/editCust/:id" element={<EditCust />} />
           <Route exact path="/addCust/:id" element={<AddCust />} />
