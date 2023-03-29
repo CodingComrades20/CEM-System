@@ -16,7 +16,6 @@ export default function EditPayment (){
 
 
 const{status,paymentMethod,paymentDate,dueAmount,supplier}=payment;
-
 const onInputChange=(e)=>{
 setPayment({...payment,[e.target.name]:e.target.value})
 };
@@ -51,9 +50,11 @@ navigate("/")
             </label>
             <input type={"text"} className="form-control" placeholder='Select status' name='status' value={status}
             onChange={(e)=>onInputChange(e)}/>
-              <select>
-                <option> </option>
-              </select>
+            
+
+
+
+
           </div>
        <div className='mb-3>'>
             <label htmlFor="PaymentMethod" className="form-lable">

@@ -17,7 +17,9 @@ import AddPayment from "./Pages/Payment/AddPayments"
 import EditPayment from "./Pages/Payment/EditPayments"
 import ViewPayment from "./Pages/Payment/ViewPayments"
 import Payment from "./Pages/Payment/PaymentList"
-
+import AddCategory from "./Pages/Product/AddCategory"
+import DropdownCategory from "./Pages/Product/DropdownCategory"
+import Categorylist from "./Pages/Product/CategoryList";
 function App() {
   return (
     <div className="App">
@@ -40,7 +42,9 @@ function App() {
           <Route exact path="/addPayment" element={<AddPayment/>}/>
           <Route exact path="/editPayment/:id" element={<EditPayment/>}/>
           <Route exact path="/viewPayment/:id" element={<ViewPayment/>}/>
-          
+          <Route exact path="/addCategory" element={<AddCategory/>}/>
+          <Route exact path="/Categorylist" element={<Categorylist/>}/>
+          <Route exact path="/dropdownlist" element={<DropdownCategory/>}/>
         </Routes>
       </Router>
     </div>

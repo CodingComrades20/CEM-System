@@ -1,6 +1,9 @@
 import axios from 'axios';
-import React, { useState } from 'react'
+//import React, { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom';
+import DropdownCategory from './DropdownCategory';
+import React, { useState, useEffect } from 'react';
+
 export default function AddProduct (){
   let navigate=useNavigate()
  const[product,setProduct]=useState({
@@ -20,11 +23,28 @@ const onInputChange=(e)=>{
 setProduct({...product,[e.target.name]:e.target.value})
 };
 
+
+
+
 const onSubmit=async(e)=>{
 e.preventDefault();
 await axios.post("http://localhost:8080/product",product) 
-navigate("/")
+navigate("/product")
 };
+
+
+  const [options, setOptions] = useState([]);
+
+  useEffect(() => {
+    // Fetch data from the Spring Boot controller
+    const fetchData = async () => {
+      const response = await axios.get('http://localhost:8080/category');
+      const options = response.data.map(row => ({  label: row.categoryType,value: row.id}));
+      setOptions(options);
+    };
+
+    fetchData();
+  }, []);
 
 {
   return (
@@ -51,13 +71,13 @@ navigate("/")
 
           <div className='mb-3>'>
             <label htmlFor="Category" className="form-lable">
-            Product Category
+            Select Category
             </label>
-            <input type={"text"} className="form-control" placeholder='Select Product category' name='category' value={category}
-            onChange={(e)=>onInputChange(e)}/>
-              <select>
-                <option> </option>
-              </select>
+            <select onChange={(e)=>onInputChange(e)} className="form-control" placeholder='---select category---'name='category' value={category}>
+      {options.map(option => (
+        <option key={option.value} value={option.lable} >{option.label}</option>
+      ))}
+    </select>
           </div>
 
           <div className='mb-3>'>

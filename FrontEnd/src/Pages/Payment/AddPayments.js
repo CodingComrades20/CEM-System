@@ -24,7 +24,7 @@ setPayment({...payment,[e.target.name]:e.target.value})
 const onSubmit=async(e)=>{
 e.preventDefault();
 await axios.post("http://localhost:8080/payment",payment) 
-navigate("/")
+navigate("/payment")
 };
 
 {
