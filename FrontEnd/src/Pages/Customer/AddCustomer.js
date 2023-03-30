@@ -2,6 +2,11 @@ import axios from "axios";
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 
+/**
+ * This component will handle the customer adding part.
+ * @returns the AddCustomer component.
+ */
+
 export default function AddCustomer() {
   let navigate = useNavigate();
 
@@ -63,7 +68,7 @@ export default function AddCustomer() {
                 Contact Number
               </label>
               <input
-                type={"text"}
+                type={"number"}
                 className="form-control"
                 placeholder="Enter Customer's Contact Number"
                 name="cno"
@@ -73,7 +78,7 @@ export default function AddCustomer() {
             </div>
             <div className="mb-5">
               <label htmlFor="Email" className="form-label">
-                E-mail
+                E-mail 
               </label>
               <input
                 type={"text"}

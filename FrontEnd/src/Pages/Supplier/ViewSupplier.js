@@ -2,6 +2,11 @@ import axios from "axios";
 import React, { useEffect,useState } from "react";
 import { Link, useParams } from "react-router-dom";
 
+/**
+ * This component will show the full details of the supplier.
+ * @returns the ViewSupplier component.
+ */
+
 export default function ViewSupplier() {
   const [supplier, setSupplier] = useState({
     name: "",
@@ -31,26 +36,26 @@ export default function ViewSupplier() {
             <div className="card-header">
               Details of user id : {supplier.id}
               <ul className="list-group list-group-flush">
-                <li className="list-group-item">
+                <li className="list-group-item my-2">
                   <b>Name:</b>
                   {supplier.name}
                 </li>
-                <li className="list-group-item">
+                <li className="list-group-item my-2">
                   <b>Address:</b>
                   {supplier.address}
                 </li>
-                <li className="list-group-item">
+                <li className="list-group-item my-2">
                   <b>Contact Number:</b>
                   {supplier.cno}
                 </li>
-                <li className="list-group-item">
+                <li className="list-group-item my-2">
                   <b>Email:</b>
                   {supplier.email}
                 </li>
               </ul>
             </div>
           </div>
-          <Link className="btn btn-primary my-2" to={"/supplierist"}>
+          <Link className="btn btn-primary my-4" to={"/supplierlist"}>
             Back to Home
           </Link>
         </div>

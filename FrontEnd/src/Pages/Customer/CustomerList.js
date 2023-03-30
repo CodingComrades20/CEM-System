@@ -2,6 +2,11 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { Link, useParams } from "react-router-dom";
 
+/**
+ * This component will handle the customer list.
+ * @returns the CustomerList component.
+ */
+
 export default function CustomerList() {
   const [customers, setCustomers] = useState([]);
 
@@ -15,7 +20,8 @@ export default function CustomerList() {
     const result = await axios.get("http://localhost:8080/customers");
     setCustomers(result.data);
   };
-
+  
+  // Confirmation for delete a record.
   const deleteCustomer = async (id) => {
     const confirmed = window.confirm('Are you sure you want to delete this customer?');
     if (confirmed) { 
@@ -34,7 +40,7 @@ export default function CustomerList() {
               <th scope="col">Name</th>
               <th scope="col">Address</th>
               <th scope="col">Contact No</th>
-              <th scope="col">Email</th>
+              
               <th scope="col">Action</th>
             </tr>
           </thead>
@@ -47,11 +53,11 @@ export default function CustomerList() {
                 <td>{customer.name}</td>
                 <td>{customer.address}</td>
                 <td>{customer.cno}</td>
-                <td>{customer.email}</td>
+               
                 
                 <td>
                   <Link
-                    className="btn btn-primary mx-2"
+                    className="btn btn-primary mx-2"       //style={{backgroundColor:"#0f0"}}
                     to={`/viewcustomer/${customer.id}`}
                   >
                     View

@@ -2,6 +2,11 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
 
+/**
+ * This component will handle the changes of customer.
+ * @returns the EditCustomer component.
+ */
+
 export default function EditCustomer() {
   let navigate = useNavigate();
 
@@ -74,7 +79,7 @@ export default function EditCustomer() {
                 Contact Number
               </label>
               <input
-                type={"text"}
+                type={"number"}
                 className="form-control"
                 placeholder="Enter Customer's Contact Number"
                 name="cno"
@@ -95,7 +100,7 @@ export default function EditCustomer() {
                 onChange={(e) => onInputChange(e)}
               />
             </div>
-            <button type="submit" className="btn btn-outline-primary">
+            <button type="submit" className="btn btn-outline-primary" >
               Submit
             </button>
             <Link className="btn btn-outline-danger mx-2" to="/customerlist">

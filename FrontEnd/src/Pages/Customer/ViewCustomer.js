@@ -2,6 +2,11 @@ import axios from "axios";
 import React, { useEffect,useState } from "react";
 import { Link, useParams } from "react-router-dom";
 
+/**
+ * This component will show the full details of the customer.
+ * @returns the ViewCustomer component.
+ */
+
 export default function ViewCustomer() {
   const [customer, setCustomer] = useState({
     name: "",

@@ -2,6 +2,11 @@ import axios from "axios";
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 
+/**
+ * This component will handle the supplier adding.
+ * @returns the AddSupplier component.
+ */
+
 export default function AddSupplier() {
   let navigate = useNavigate();
 
@@ -63,7 +68,7 @@ export default function AddSupplier() {
                 Contact Number
               </label>
               <input
-                type={"text"}
+                type={"number"}
                 className="form-control"
                 placeholder="Enter Supplier's Contact Number"
                 name="cno"

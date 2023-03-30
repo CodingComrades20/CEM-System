@@ -2,6 +2,11 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
 
+/**
+ * This component will handle the changes of customer.
+ * @returns the EditSupplier component.
+ */
+
 export default function EditSupplier() {
   let navigate = useNavigate();
 
@@ -74,7 +79,7 @@ export default function EditSupplier() {
                 Contact Number
               </label>
               <input
-                type={"text"}
+                type={"number"}
                 className="form-control"
                 placeholder="Enter Supplier's Contact Number"
                 name="cno"

@@ -2,6 +2,11 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { Link, useParams } from "react-router-dom";
 
+/**
+ * This component will handle the supplier list.
+ * @returns the SupplierList component.
+ */
+
 export default function Supplier() {
   const [suppliers, setSuppliers] = useState([]);
 
