@@ -1,103 +1,148 @@
 import axios from 'axios';
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react';
 import { Link, useNavigate, useParams } from 'react-router-dom';
 
-export default function EditPayment (){
-  let navigate=useNavigate()
+/**
+ * This component will handle the edit payment details
+ * @returns the EditPayment component
+ */
+export default function EditPayment() {
+  let navigate = useNavigate();
 
-  const {id}=useParams()
- const[payment,setPayment]=useState({
-  status:"",
-  paymentMethod:"",
-  paymentDate:"",
-  dueAmount:"",
-  supplier:"",
- })
+  // Getting the payment ID from the URL parameters.
+  const { id } = useParams();
 
+  // Initializing the payment state with default values.
+  const [payment, setPayment] = useState({
+    status: '',
+    paymentMethod: '',
+    paymentDate: '',
+    dueAmount: '',
+    supplier: '',
+  });
 
-const{status,paymentMethod,paymentDate,dueAmount,supplier}=payment;
-const onInputChange=(e)=>{
-setPayment({...payment,[e.target.name]:e.target.value})
-};
+  const { status, paymentMethod, paymentDate, dueAmount, supplier } = payment;
 
-useEffect(()=>{
-    loadPayment()
+  // Function to handle input change.
+  const onInputChange = (e) => {
+    setPayment({ ...payment, [e.target.name]: e.target.value });
+  };
 
+  // Effect hook to load the payment details on component mount.
+  useEffect(() => {
+    loadPayment();
+  }, []);
 
-},[])
+  // Function to handle form submission.
+  const onSubmit = async (e) => {
+    e.preventDefault();
+    await axios.put(`http://localhost:8080/payment/${id}`, payment);
+    navigate('/paymentlist');
+  };
 
-const onSubmit=async(e)=>{
-e.preventDefault();
-await axios.put(`http://localhost:8080/payment/${id}`,payment) 
-navigate("/")
-};
- const loadPayment=async()=>{
-    const result=await axios.get(`http://localhost:8080/payment/${id}`)
-    setPayment(result.data)
+  // Function to load the payment details from the server.
+  const loadPayment = async () => {
+    const result = await axios.get(`http://localhost:8080/payment/${id}`);
+    setPayment(result.data);
+  };
 
- }
-
-
- return (
+  // Returning the component.
+  return (
     <div className='container'>
-      <div className='row>'>
+      <div className='row'>
         <div className='col-md-6 offset-md-3 border rounded p-4 mt-2 shadow'>
           <h2 className='text-center m-4'>Edit Payment</h2>
-          <form onSubmit={(e=>onSubmit(e))}>
-          <div className='mb-3>'>
-            <label htmlFor="" className="form-lable">
-          Status
-            </label>
-            <input type={"text"} className="form-control" placeholder='Select status' name='status' value={status}
-            onChange={(e)=>onInputChange(e)}/>
-            
+          <form onSubmit={(e) => onSubmit(e)}>
+            <div className='mb-3'>
+              <label htmlFor='status' className='form-label'>
+                Status
+              </label>
+              <input
+                type='text'
+                className='form-control'
+                placeholder='Select status'
+                name='status'
+                value={status}
+                onChange={(e) => onInputChange(e)}
+              />
+            </div>
 
+            <div className='mb-3'>
+              <label htmlFor='paymentMethod' className='form-label'>
+                Payment Method
+              </label>
+              <select
+                className='form-select'
+                aria-label='Default select example'
+                required
+                name='paymentMethod'
+                value={paymentMethod}
+                onChange={(e) => onInputChange(e)}
+              >
+                <option value=''>--Select Payment Method-- </option>
+                <option value='cash'>Cash</option>
+                <option value='checks'>Checks</option>
+                <option value='debit cards'>Debit cards</option>
+                <option value='credit catds'>Credit cards</option>
+              </select>
+            </div>
 
+            <div className='mb-3'>
+              <label htmlFor='paymentDate' className='form-label'>
+                Payment date
+              </label>
+              <input
+                type='date'
+                className='form-control'
+                placeholder='Payment date'
+                name='paymentDate'
+                value={paymentDate}
+                onChange={(e) => onInputChange(e)}
+              />
+            </div>
 
+            <div className='mb-3'>
+              <label htmlFor='dueAmount' className='form-label'>
+                Due Amount
+              </label>
+              <input
+                type='number'
+                className='form-control'
+                placeholder='Due Amount'
+                name='dueAmount'
+                value={dueAmount}
+                onChange={(e) => onInputChange(e)}
+              />
+            </div>
 
-          </div>
-       <div className='mb-3>'>
-            <label htmlFor="PaymentMethod" className="form-lable">
-            Payment Method
-            </label>
-            <input type={"text"} className="form-control" placeholder='Payment Method' name='paymentMethod' value={paymentMethod}
-            onChange={(e)=>onInputChange(e)}/>
-          </div>
-          <div className='mb-3>'>
-            <label htmlFor="PaymentDate" className="form-lable">
-           Payment date
-            </label>
-            <input type={"date"} className="form-control" placeholder=' Payment date' name='paymentDate' value={paymentDate}
-            onChange={(e)=>onInputChange(e)}/>
-          </div>
-          <div className='mb-3>'>
-            <label htmlFor="DueAmount" className="form-lable">
-            Due Amount
-            </label>
-            <input type={"text"} className="form-control" placeholder='Due Amount' name='dueAmount' value={dueAmount}
-            onChange={(e)=>onInputChange(e)}/>
-          </div>
-          <div className='mb-3>'>
-            <label htmlFor="Suppier" className="form-lable">
-            Supplier
-            </label>
-            <input type={"text"} className="form-control" placeholder='Supplier' name='supplier' value={supplier}
-            onChange={(e)=>onInputChange(e)}/>
-          </div>
+            <div className='mb-3'>
+              <label htmlFor='supplier' className='form-label'>
+                Supplier Name
+              </label>
+              <input
+                type='text'
+                className='form-control'
+                placeholder='Supplier'
+                name='supplier'
+                value={supplier}
+                onChange={(e) => onInputChange(e)}
+                required 
+                pattern="^[a-zA-Z0-9 .]+$"
+              />
+            </div>
 
-          <div className="text-center m-4">
-          <button type='submit' className='btn btn-outline-primary mx-2'>Save</button>
-          <Link  className='btn btn-outline-danger mx-2 ' to={`/viewpayment/${payment.id}`}>Cancel</Link>
-          </div>
-
-
-
-
+            <div className='text-center m-4'>
+              <button type='submit' className='btn btn-outline-primary mx-2'>
+                Save
+              </button>
+              <Link className='btn btn-outline-danger mx-2'to={`/viewpayment/${payment.id}`}>
+                Cancel
+              </Link>
+            </div>
           </form>
-
-
-        </div>
         </div>
       </div>
-  )
-  }
+    </div>
+  );
+
+}

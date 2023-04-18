@@ -18,14 +18,19 @@ import EditPayment from "./Pages/Payment/EditPayments"
 import ViewPayment from "./Pages/Payment/ViewPayments"
 import Payment from "./Pages/Payment/PaymentList"
 import AddCategory from "./Pages/Product/AddCategory"
-import DropdownCategory from "./Pages/Product/DropdownCategory"
 import Categorylist from "./Pages/Product/CategoryList";
+import ImageUpload from "./Pages/Product/Image";
+import ImageDisplay from "./Pages/Product/ImageDisplay";
+import ImageCrud from "./Pages/Product/ImageCrud.JS";
+
 function App() {
   return (
     <div className="App">
       <Router>
         <Navbar />
+        <div>
 
+    </div>
         <Routes>
           <Route exact path="/emp" element={<EmpList />} />
           <Route exact path="/addEmp" element={<AddEmp />} />
@@ -35,16 +40,20 @@ function App() {
           <Route exact path="/editCust/:id" element={<EditCust />} />
           <Route exact path="/addCust/:id" element={<AddCust />} />
           <Route exact path="/cust/:id" element={<CustList />} />
-          <Route exact path="/product" element={<Product/>}/>
+          
+          <Route exact path="/productlist" element={<Product/>}/>
           <Route exact path="/addProduct" element={<AddProduct/>}/>
           <Route exact path="/editProduct/:id" element={<EditProduct/>}/>    
-          <Route exact path="/payment" element={<Payment/>}/>
+          <Route exact path="/paymentlist" element={<Payment/>}/>
           <Route exact path="/addPayment" element={<AddPayment/>}/>
           <Route exact path="/editPayment/:id" element={<EditPayment/>}/>
           <Route exact path="/viewPayment/:id" element={<ViewPayment/>}/>
           <Route exact path="/addCategory" element={<AddCategory/>}/>
           <Route exact path="/Categorylist" element={<Categorylist/>}/>
-          <Route exact path="/dropdownlist" element={<DropdownCategory/>}/>
+          <Route exact path="/Uploadimage" element={<ImageUpload/>}/>
+          <Route exact path="/displayimage" element={<ImageDisplay id={5}/>}/>
+          <Route exact path="/crudimage" element={<ImageCrud/>}/>
+
         </Routes>
       </Router>
     </div>
