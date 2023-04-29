@@ -129,6 +129,7 @@ export default function AddProduct() {
               name="category"
               value={category}
             >
+              <option value="">---select category---</option>
                {options.map((option) => (
                <option key={option.value} value={option.label}>
                   {option.label}
