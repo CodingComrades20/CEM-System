@@ -22,6 +22,7 @@ export default function AddProduct() {
   const { image, name, category, quantity, price} = product;
   const [manufactureDate, setManufactureDate] = useState("");
   const [expiryDate, setExpiryDate] = useState("");
+  const [selectedFile, setSelectedFile] = useState(null);
   // Handle input change events
   const onInputChange = (e) => {
       const { name, value } = e.target;
@@ -44,6 +45,12 @@ export default function AddProduct() {
   const onSubmit = async (e) => {
     e.preventDefault();
     await axios.post(PRODUCT_API, product);
+    const formData = new FormData();
+    formData.append('file', selectedFile);
+    fetch('http://localhost:8080/api/images/upload', {
+      method: 'POST',
+      body: formData,
+    })
     navigate("/productlist");
   };
 
@@ -60,10 +67,10 @@ export default function AddProduct() {
 
     fetchData();
   }, []);
-
-
-
-  
+ 
+  const handleFileInputChange = (event) => {
+    setSelectedFile(event.target.files[0]);
+  };
 
 
 
@@ -90,10 +97,14 @@ export default function AddProduct() {
             />
           </div>
 
-      {/*    <div className="mb-3">
+          <div className="mb-3">
             <label htmlFor="Name" className="form-lable">
               Product Image
             </label>
+            {/* <label>
+        Choose an image to upload:
+        <input type="file" name="file" onChange={handleFileInputChange} value={image} />
+      </label> */}
             <input
               type={"file"}
               className="form-control"
@@ -101,11 +112,12 @@ export default function AddProduct() {
               accept="image/*"
               placeholder="Upload Image"
               name="image"
-              value={image}
-              onChange={(e) => onInputChange(e)}
+             // value={image}
+              onChange={handleFileInputChange}//{(e) => onInputChange(e)}
             />
+     
           </div>
-  */}
+  
           <div className="mb-3">
             <label htmlFor="Category" className="form-lable">
               Select Category

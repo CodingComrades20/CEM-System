@@ -14,6 +14,7 @@ export default function EditProduct (){
   // Getting product id from URL.
   const {id}=useParams()
 
+
   // Initializing state for product details.
  const[product,setProduct]=useState({
   image:"",
@@ -26,9 +27,10 @@ export default function EditProduct (){
  })
 
 // Destructuring product state to get individual values.
-const{name,category,quantity,price}=product;
+const{name,image,category,quantity,price}=product;
 const [manufactureDate, setManufactureDate] = useState("");
 const [expiryDate, setExpiryDate] = useState("");
+const [selectedFile, setSelectedFile] = useState(null);
 const onInputChange=(e)=>{
   const { name, value } = e.target;
     if (name === "manufactureDate") {
@@ -53,10 +55,20 @@ useEffect(()=>{
 
 },[])
 
+const formData = new FormData();
+
 // Handling form submission and updating product data.
 const onSubmit=async(e)=>{
 e.preventDefault();
 await axios.put(`http://localhost:8080/product/${id}`,product) 
+if (selectedFile) {
+  const formData = new FormData();
+  formData.append('file', selectedFile);
+  await fetch(`http://localhost:8080/api/images/${id}`, {
+    method: 'PUT',
+    body: formData,
+  });
+}
 navigate("/productlist")
 };
 
@@ -78,6 +90,15 @@ navigate("/productlist")
 
    fetchData();
  }, []);
+
+ const handleFileInputChange = (event) => {
+  setSelectedFile(event.target.files[0]);
+};
+
+
+
+
+
  
  return (
   <div className='container'>
@@ -100,6 +121,27 @@ navigate("/productlist")
               pattern="^[a-zA-Z0-9 ]+$"
             />
           </div>
+          <div className="mb-3">
+            <label htmlFor="Name" className="form-lable">
+              Product Image
+            </label>
+            {/* <label>
+        Choose an image to upload:
+        <input type="file" name="file" onChange={handleFileInputChange} value={image} />
+      </label> */}
+            <input
+              type={"file"}
+              className="form-control"
+              multiple
+              accept="image/*"
+              placeholder="Upload Image"
+              name="image"
+             // value={image}
+              onChange={handleFileInputChange}//{(e) => onInputChange(e)}
+            />
+     
+          </div>
+     
 
           <div className='mb-3>'>
             <label htmlFor="Category" className="form-lable">

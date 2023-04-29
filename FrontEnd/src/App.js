@@ -19,10 +19,9 @@ import ViewPayment from "./Pages/Payment/ViewPayments"
 import Payment from "./Pages/Payment/PaymentList"
 import AddCategory from "./Pages/Product/AddCategory"
 import Categorylist from "./Pages/Product/CategoryList";
-import ImageUpload from "./Pages/Product/Image";
-import ImageDisplay from "./Pages/Product/ImageDisplay";
-import ImageCrud from "./Pages/Product/ImageCrud.JS";
-
+import ImageUpload from "./Pages/Product/Image/Image";
+import ImageDisplay from "./Pages/Product/Image/ImageDisplay";
+import Delete from "./Pages/Product/Image/imageDelete";
 function App() {
   return (
     <div className="App">
@@ -39,8 +38,7 @@ function App() {
           <Route exact path="/viewCust/:id" element={<ViewCust />} />
           <Route exact path="/editCust/:id" element={<EditCust />} />
           <Route exact path="/addCust/:id" element={<AddCust />} />
-          <Route exact path="/cust/:id" element={<CustList />} />
-          
+          <Route exact path="/cust/:id" element={<CustList />} />         
           <Route exact path="/productlist" element={<Product/>}/>
           <Route exact path="/addProduct" element={<AddProduct/>}/>
           <Route exact path="/editProduct/:id" element={<EditProduct/>}/>    
@@ -51,9 +49,8 @@ function App() {
           <Route exact path="/addCategory" element={<AddCategory/>}/>
           <Route exact path="/Categorylist" element={<Categorylist/>}/>
           <Route exact path="/Uploadimage" element={<ImageUpload/>}/>
-          <Route exact path="/displayimage" element={<ImageDisplay id={5}/>}/>
-          <Route exact path="/crudimage" element={<ImageCrud/>}/>
-
+          <Route exact path="/displayimage" element={<ImageDisplay id={1}/>}/>
+          <Route exact path="/deleteimage" element={<Delete/>}/>
         </Routes>
       </Router>
     </div>

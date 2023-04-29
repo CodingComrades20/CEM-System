@@ -49,7 +49,7 @@ export default function AddCategory() {
                 value={categoryType}
                 onChange={(e) => onInputChange(e)}
                 required 
-                pattern="^[a-zA-Z0-9]+$"
+                pattern="^[a-zA-Z0-9 ]+$"
               />
             </div>
 

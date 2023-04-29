@@ -26,6 +26,6 @@ function ImageUpload() {
       <button type="submit">Upload</button>
     </form>
   );
-}
 
+  }
 export default ImageUpload;

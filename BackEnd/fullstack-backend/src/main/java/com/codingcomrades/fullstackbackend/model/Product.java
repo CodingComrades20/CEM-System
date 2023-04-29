@@ -6,15 +6,21 @@ import jakarta.persistence.*;
 import java.util.Date;
 
 @Entity
+
+
 @Table(name = "product")
+
 public class Product {
+
+
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @JsonFormat(pattern = "yyyy/MM/dd")
 
     private Long id;
     @Lob
     private byte[] image;
+
     private String name;
     private String category;
     private Integer Quantity;
@@ -24,6 +30,7 @@ public class Product {
     @Temporal(TemporalType.DATE)
     private Date expiryDate;
 
+
     public byte[] getImage() {
         return image;
     }
@@ -31,6 +38,7 @@ public class Product {
     public void setImage(byte[] image) {
         this.image = image;
     }
+
 
     public Date getManufactureDate() {
         return manufactureDate;
@@ -91,3 +99,4 @@ public class Product {
 
 
 }
+
