@@ -16,22 +16,28 @@ public class SupplierController {
     private SupplierRepository supplierRepository;
 
     @PostMapping("/supplier")
-    Supplier newSupplier(@RequestBody Supplier newSupplier){
+    Supplier newSupplier(@RequestBody Supplier newSupplier) {
+
         return supplierRepository.save(newSupplier);
     }
 
     @GetMapping("/suppliers")
-    List<Supplier> getAllSuppliers() { return supplierRepository.findAll(); }
+    List<Supplier> getAllSuppliers() {
+
+        return supplierRepository.findAll();
+    }
 
 
-    @GetMapping ("/supplier/{id}")
+    @GetMapping("/supplier/{id}")
     Supplier getSupplierById(@PathVariable Long id) {
+
         return supplierRepository.findById(id)
                 .orElseThrow(() -> new SupplierNotFoundException(id));
     }
 
     @PutMapping("/supplier/{id}")
     Supplier updateSupplier(@RequestBody Supplier newSupplier, @PathVariable Long id) {
+
         return supplierRepository.findById(id)
                 .map(supplier -> {
                     supplier.setName(newSupplier.getName());
@@ -43,13 +49,14 @@ public class SupplierController {
                 }).orElseThrow(() -> new SupplierNotFoundException(id));
     }
 
-    @DeleteMapping ("/supplier/{id}")
-    String deleteSupplier(@PathVariable Long id){
-        if(!supplierRepository.existsById(id)){
+    @DeleteMapping("/supplier/{id}")
+    String deleteSupplier(@PathVariable Long id) {
+
+        if (!supplierRepository.existsById(id)) {
             throw new SupplierNotFoundException(id);
         }
         supplierRepository.deleteById(id);
-        return "Supplier with id "+id+"has been deleted success.";
+        return "Supplier with id " + id + "has been deleted success.";
 
     }
 

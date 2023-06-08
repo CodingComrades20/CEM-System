@@ -17,22 +17,26 @@ public class CustomerController {
 
     @PostMapping("/customer")
     Customer newCustomer(@RequestBody Customer newCustomer) {
+
         return customerRepository.save(newCustomer);
     }
 
     @GetMapping("/customers")
     List<Customer> getAllCustomers() {
+
         return customerRepository.findAll();
     }
 
     @GetMapping("/customer/{id}")
     Customer getCustomerById(@PathVariable Long id) {
+
         return customerRepository.findById(id)
                 .orElseThrow(() -> new CustomerNotFoundException(id));
     }
 
     @PutMapping("/customer/{id}")
     Customer updateCustomer(@RequestBody Customer newCustomer, @PathVariable Long id) {
+
         return customerRepository.findById(id)
                 .map(customer -> {
                     customer.setName(newCustomer.getName());
@@ -40,17 +44,21 @@ public class CustomerController {
                     customer.setCno(newCustomer.getCno());
                     customer.setEmail(newCustomer.getEmail());
 
+
                     return customerRepository.save(customer);
                 }).orElseThrow(() -> new CustomerNotFoundException(id));
     }
 
     @DeleteMapping("/customer/{id}")
-    String deleteCustomer(@PathVariable Long id){
-        if(!customerRepository.existsById(id)){
+    String deleteCustomer(@PathVariable Long id) {
+
+        if (!customerRepository.existsById(id)) {
+
             throw new CustomerNotFoundException(id);
         }
+
         customerRepository.deleteById(id);
-        return  "Customer with id "+id+" has been deleted success.";
+        return "Customer with id " + id + " has been deleted success.";
     }
 
 }

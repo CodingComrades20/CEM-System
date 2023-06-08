@@ -15,10 +15,10 @@ public class SupplierNotFoundAdvice {
     @ResponseBody
     @ExceptionHandler(SupplierNotFoundException.class)
     @ResponseStatus(HttpStatus.NOT_FOUND)
-    public Map<String,String> exceptionHandler(SupplierNotFoundException exception) {
+    public Map<String, String> exceptionHandler(SupplierNotFoundException exception) {
 
-        Map<String,String>  errorMap=new HashMap<>();
-        errorMap.put("errorMessage",exception.getMessage());
+        Map<String, String> errorMap = new HashMap<>();
+        errorMap.put("errorMessage", exception.getMessage());
 
         return errorMap;
     }

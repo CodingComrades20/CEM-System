@@ -1,91 +1,95 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { Link, useParams } from "react-router-dom";
-import { CUSTOMERS_API } from "../../util";
+import { SALES_API } from "../../util";
 
 
 /**
- * This component will handle the customer list.
- * @returns the CustomerList component.
+ * This component will handle the sales list.
+ * @returns the SaleList component.
  */
 
-export default function CustomerList() {
+export default function SaleList() {
   
   // state to hold the list of customers retrieved from the server.
-  const [customers, setCustomers] = useState([]);
+  const [sales, setSales] = useState([]);
 
   // retrieves the id parameter from the URL.
   const { id } = useParams();
 
   // loads the customer list from the server when the component is mounted.
   useEffect(() => {
-    loadCustomers();
+    loadSales();
   }, []);
 
-  // retrieves the list of customers from the server.
-  const loadCustomers = async () => {
-    const result = await axios.get(CUSTOMERS_API);
-    setCustomers(result.data);
+  // retrieves the list of sales from the server.
+  const loadSales = async () => {
+    const result = await axios.get(SALES_API);
+    setSales(result.data);
   };
   
-  // Confirmation message for delete a customer's record.
-  const deleteCustomer = async (id) => {
-    const confirmed = window.confirm('Are you sure you want to delete this customer?');
+  // Confirmation message for delete a sales record.
+  const deleteSale = async (id) => {
+    const confirmed = window.confirm('Are you sure you want to delete this sales order?');
     if (confirmed) { 
-    await axios.delete(`http://localhost:8080/customer/${id}`);
-    loadCustomers();
+    await axios.delete(`http://localhost:8080/sale/${id}`);
+    loadSales();
     }
   };
 
-  // renders the customer list as a table.
+  // renders the sales list as a table.
   return (
     <div className="container">
       <div className="py-4">
         <table className="table border shadow">
           <thead>
             <tr>
-            <th colSpan="6" className="text-center" >CUSTOMER LIST</th>
+            <th colSpan="6" className="text-center" >SALES LIST</th>
             </tr>
             <tr>
               <th scope="col">Seriel No</th>
-              <th scope="col">Name</th>
-              <th scope="col">Address</th>
+              <th scope="col">Sales Order Id</th>
+              <th scope="col">Customer Name</th>
+              <th scope="col">Delivery Address No</th>
+              <th scope="col">Delivered Date </th>
               <th scope="col">Contact No</th>
               <th scope="col">Action</th>
             </tr>
           </thead>
           <tbody>
-            {customers.map((customer, index) => (
+            {sales.map((sale, index) => (
               <tr>
                 <th scope="row" key={index}>
                   {index + 1}
                 </th>
-                <td>{customer.name}</td>
-                <td>{customer.address}</td>
-                <td>{customer.cno}</td>
-                
+                <td>{sale.salesorderid}</td>
+                <td>{sale.cusname}</td>
+                <td>{sale.deliveryaddress}</td>
+                <td>{sale.date}</td>
+                <td>{sale.cno}</td>
+                              
                 <td>
 
-                  {/* Link to view customer details */}
+                  {/* Link to view sale details */}
                   <Link
                     className="btn btn-primary mx-2" 
-                    to={`/viewcustomer/${customer.id}`}
+                    to={`/viewsale/${sale.id}`}
                   >
                     View
                   </Link>
 
-                  {/* Link to edit customer details */}
+                  {/* Link to edit sale details */}
                   <Link
                     className="btn btn-outline-primary mx-2"
-                    to={`/editcustomer/${customer.id}`}
+                    to={`/editsale/${sale.id}`}
                   >
                     Edit
                   </Link>
 
-                  {/* Button to delete customer */}
+                  {/* Button to delete sale */}
                   <button
                     className="btn btn-danger mx-2"
-                    onClick={() => deleteCustomer(customer.id)}
+                    onClick={() => deleteSale(sale.id)}
                   >
                     Delete
                   </button>

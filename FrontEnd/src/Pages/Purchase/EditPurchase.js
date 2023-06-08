@@ -5,11 +5,11 @@ import { Link, useNavigate, useParams } from "react-router-dom";
 
 
 /**
- * This component will handle the changes of customer.
- * @returns the EditCustomer component.
+ * This component will handle the changes of purchases.
+ * @returns the EditPurchase component.
  */
 
-export default function EditCustomer() {
+export default function EditPurchase() {
 
   // hook to navigate to a different page after a successful submission.
   let navigate = useNavigate();
@@ -17,39 +17,39 @@ export default function EditCustomer() {
   // get the ID parameter from the URL.
   const { id } = useParams();
 
-  // set the initial state of the customer.
-  const [customer, setCustomer] = useState({
-    name: "",
-    address: "",
+  // set the initial state of the purchase.
+  const [purchase, setPurchase] = useState({
+    purchaseorderid: "",
+    supname: "",
+    date:"",
     cno: "",
-    email: "",
     
   });
 
   // destructuring the state.
-  const { name, address, cno, email } = customer;
+  const { purchaseorderid, supname, date, cno } = purchase;
 
   // handle input changes.
   const onInputChange = (e) => {
-    setCustomer({ ...customer, [e.target.name]: e.target.value });
+    setPurchase({ ...sale, [e.target.name]: e.target.value });
   };
 
- // load the customer data from the server.
+ // load the sale data from the server.
   useEffect(() => {
-    loadCustomer();
+    loadPurchase();
   }, []);
 
   // handle form submission.
   const onSubmit = async (e) => {
     e.preventDefault();
-    await axios.put(`http://localhost:8080/customer/${id}`, customer);
-    navigate("/customerlist");
+    await axios.put(`http://localhost:8080/purchase/${id}`, purchase);
+    navigate("/purchaselist");
   };
 
-  // fetch the customer data from the server and update the state.
-  const loadCustomer = async () => {
-    const result = await axios.get(`http://localhost:8080/customer/${id}`);
-    setCustomer(result.data);
+  // fetch the sale data from the server and update the state.
+  const loadPurchase= async () => {
+    const result = await axios.get(`http://localhost:8080/purchase/${id}`);
+    setPurchase(result.data);
   };
 
   // render the form.
@@ -57,58 +57,59 @@ export default function EditCustomer() {
     <div className="container">
       <div className="row">
         <div className="col-md-6 offset-md-3 border rounded p-4 mt-2 shadow">
-          <h2 className="text-center m-4">Edit Customer's Details</h2>
+          <h2 className="text-center m-4">Edit Purchases Details</h2>
 
           <form onSubmit={(e) => onSubmit(e)}>
             <div className="mb-3">
-              <label htmlFor="Name" className="form-label">
-                Name
+              <label htmlFor="purchaseorderid" className="form-label">
+              Purchase Order Id
               </label>
               <input
                 type={"text"}
                 className="form-control"
-                placeholder="Enter Customer's Name"
-                name="name"
-                value={name}
+                placeholder="Enter Purchase Order Id"
+                name="purchaseorderid"
+                value={purchaseorderid}
                 onChange={(e) => onInputChange(e)}
               />
             </div>
             <div className="mb-3">
-              <label htmlFor="Address" className="form-label">
-                Address
+              <label htmlFor="supname" className="form-label">
+              Supplier Name
               </label>
               <input
                 type={"text"}
                 className="form-control"
-                placeholder="Enter customer's Address"
-                name="address"
-                value={address}
+                placeholder="Enter Supplier's Name"
+                name="supname"
+                value={supname}
+                onChange={(e) => onInputChange(e)}
+              />
+            </div>
+            
+            <div className="mb-3">
+              <label htmlFor="date" className="form-label">
+              Delivered Date
+              </label>
+              <input
+                type={"date"}
+                className="form-control"
+                placeholder="Enter Supplier's Contact Number"
+                name="date"
+                value={date}
                 onChange={(e) => onInputChange(e)}
               />
             </div>
             <div className="mb-3">
               <label htmlFor="cno" className="form-label">
-                Contact Number
-              </label>
-              <input
-                type={"number"}
-                className="form-control"
-                placeholder="Enter Customer's Contact Number"
-                name="cno"
-                value={cno}
-                onChange={(e) => onInputChange(e)}
-              />
-            </div>
-            <div className="mb-3">
-              <label htmlFor="Email" className="form-label">
-                E-mail
+              Contact Number
               </label>
               <input
                 type={"text"}
                 className="form-control"
-                placeholder="Enter Customer's e-mail id"
-                name="email"
-                value={email}
+                placeholder="Enter Supplier's Contact Number"
+                name="cno"
+                value={cno}
                 onChange={(e) => onInputChange(e)}
               />
             </div>
@@ -118,8 +119,8 @@ export default function EditCustomer() {
               Submit
             </button>
 
-            {/* The cancel button is a link that navigates back to the customer list page. */}
-            <Link className="btn btn-outline-danger mx-2" to="/customerlist">
+            {/* The cancel button is a link that navigates back to the purchase list page. */}
+            <Link className="btn btn-outline-danger mx-2" to="/purchaselist">
               Cancel
             </Link>
           </form>
