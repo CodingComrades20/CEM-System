@@ -1,45 +1,47 @@
 import axios from "axios";
 import React from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { CUSTOMER_API } from "../../util";
+import { SALE_API } from "../../util";
 import { Formik, Form, Field, ErrorMessage } from 'formik'; // Importing Formik, Form, Field and ErrorMessage components from Formik library.
 import * as Yup from 'yup'; // Importing Yup for form validation.
 
 
 /**
- * This component will handle the Customer details adding part.
- * @returns the AddCustomer component.
+ * This component will handle the Sales details adding part.
+ * @returns the AddSales component.
  */
 
-export default function AddCustomer() {
+export default function AddSale() {
   
   // This hook provides the ability to navigate the user to a different route.
   let navigate = useNavigate();
 
   // Define the Yup schema for form validation.
   const Schema = Yup.object({
-    name: Yup.string().required('Required'), // Name field should not be empty.
-    address: Yup.string().required('Required'), // Address field should not be empty.
+    salesorderid: Yup.string().required('Required'), // Sales order Id field should not be empty.
+    cusname: Yup.string().required('Required'),
+    deliveryaddress: Yup.string().required('Required'), // Address field should not be empty.
+    date: Yup.date().required('Required').min(new Date(), 'Date must not be in the past'),
     cno: Yup.number().required('Required').positive('Must be a positive number'), // Contact number field should not be empty and should be a positive number.
-    email: Yup.string().email('Invalid email address').required('Required'), // Email field should not be empty and should be a valid email.
+
     
   })
 
   // Handle form submission.
   const onSubmit = async (values) => {
-    await axios.post(CUSTOMER_API, values); // Send a POST request to the API with the form values.
-    navigate("/customerlist"); // Navigate to the customer list page after successful form submission.
+    await axios.post(SALE_API, values); // Send a POST request to the API with the form values.
+    navigate("/salelist"); // Navigate to the customer list page after successful form submission.
   };
 
   return (
     <div className="container">
       <div className="row">
         <div className="col-md-6 offset-md-3 border rounded p-2 mt-4 shadow">
-          <h2 className="text-center m-4"> Add New Customer </h2>
+          <h2 className="text-center m-4"> Add New Sale </h2>
 
           {/* The Formik component initializes the form values and validation schema, and provides a submit handler function. */}
           <Formik
-            initialValues={{ name: '', address: '', cno: '', email: '' }}
+            initialValues={{ salesorderid: '', cusname: '', deliveryaddress: '', date: '', cno: '' }}
             onSubmit={onSubmit}
             validationSchema={Schema}
           >
@@ -49,29 +51,55 @@ export default function AddCustomer() {
               // The Field component connects each field to the Formik form state.
               <Form>
                 <div className="mb-3">
-                  <label htmlFor="name" className="form-label">
-                    Name
+                  <label htmlFor="salesorderid" className="form-label">
+                    Sales Order Id
+                  </label>
+                  <Field
+                    type="text"
+                    className="form-control"
+                    placeholder="Enter Sales Order Id"
+                    name="salesorderid"
+                  />
+                  <ErrorMessage name="salesorderid" component="div" className="text-danger" />
+                </div>
+                
+                <div className="mb-3">
+                  <label htmlFor="cusname" className="form-label">
+                    Customer Name
                   </label>
                   <Field
                     type="text"
                     className="form-control"
                     placeholder="Enter Customer's Name"
-                    name="name"
+                    name="cusname"
                   />
-                  <ErrorMessage name="name" component="div" className="text-danger" />
+                  <ErrorMessage name="cusname" component="div" className="text-danger" />
                 </div>
 
                 <div className="mb-3">
-                  <label htmlFor="address" className="form-label">
-                    Address
+                  <label htmlFor="deliveryaddress" className="form-label">
+                    Delivery Address
                   </label>
                   <Field
                     type="text"
                     className="form-control"
-                    placeholder="Enter Customer's Address"
-                    name="address"
+                    placeholder="Enter Customer's Delivery Address"
+                    name="deliveryaddress"
                   />
-                  <ErrorMessage name="address" component="div" className="text-danger" />
+                  <ErrorMessage name="deliveryaddress" component="div" className="text-danger" />
+                </div>
+
+                <div className="mb-3">
+                  <label htmlFor="date" className="form-label">
+                  Date
+                  </label>
+                  <Field
+                    type="date"
+                    className="form-control"
+                    placeholder="Enter Sales delivered Date"
+                    name="date"
+                  />
+                  <ErrorMessage name="date" component="div" className="text-danger" />
                 </div>
 
                 <div className="mb-3">
@@ -86,19 +114,6 @@ export default function AddCustomer() {
                   />
                   <ErrorMessage name="cno" component="div" className="text-danger" />
                 </div>
-
-                <div className="mb-5">
-                  <label htmlFor="email" className="form-label">
-                    E-mail
-                  </label>
-                  <Field
-                    type="text"
-                    className="form-control"
-                    placeholder="Enter Customer's e-mail id"
-                    name="email"
-                  />
-                  <ErrorMessage name="email" component="div" className="text-danger" />
-                </div>
                 
 
                 {/* The submit button is disabled while the form is submitting, to prevent double-submission. */}
@@ -107,7 +122,7 @@ export default function AddCustomer() {
                 </button>
 
                 {/* The cancel button is a link that navigates back to the customer list page. */}
-                <Link className="btn btn-outline-danger mx-3" to="/customerlist">
+                <Link className="btn btn-outline-danger mx-3" to="/salelist">
                   Cancel
                 </Link>
 

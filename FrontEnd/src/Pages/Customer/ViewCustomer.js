@@ -2,7 +2,15 @@ import axios from "axios";
 import React, { useEffect,useState } from "react";
 import { Link, useParams } from "react-router-dom";
 
+
+/**
+ * This component will show the full details of the customer.
+ * @returns the ViewCustomer component.
+ */
+
 export default function ViewCustomer() {
+  
+  // State to hold the customer data.
   const [customer, setCustomer] = useState({
     name: "",
     address: "",
@@ -10,17 +18,21 @@ export default function ViewCustomer() {
     cno: "",
   });
 
+  // Get the customer ID from the URL using the useParams hook.
   const { id } = useParams();
 
+  // Load the customer data from the server using axios.
   useEffect(() => {
     loadCustomer();
   }, []);
 
+  // fetch the customer data from the server and update the state.
   const loadCustomer = async () => {
     const result = await axios.get(`http://localhost:8080/customer/${id}`);
     setCustomer(result.data);
   };
 
+  // render the form.
   return (
     <div className="container">
       <div className="row">
@@ -50,6 +62,8 @@ export default function ViewCustomer() {
               </ul>
             </div>
           </div>
+
+          {/* The back to Home button is a link that navigates back to the customer list page. */}
           <Link className="btn btn-primary my-4" to={"/customerlist"}>
             Back to Home
           </Link>

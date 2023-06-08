@@ -1,6 +1,11 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
+/**
+ * 
+ * @returns 
+ */
+
 export default function Navbar() {
   return (
     <div>
@@ -14,8 +19,14 @@ export default function Navbar() {
           <Link className="btn btn-outline-info mx-4" to="/addcustomer">
             Add Customer
           </Link>
+          <Link className="btn btn-outline-info mx-2" to="/addsale">
+            Add Sale
+          </Link>
           <Link className="btn btn-outline-info mx-2" to="/addsupplier">
             Add Supplier
+          </Link>
+          <Link className="btn btn-outline-info mx-2" to="/addpurchase">
+            Add Purchase
           </Link>
           </div>
 
