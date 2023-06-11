@@ -1,5 +1,5 @@
 import axios from "axios";
-import React, { useEffect,useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 
 /**
@@ -9,13 +9,13 @@ import { Link, useParams } from "react-router-dom";
 export default function ViewPayment() {
   // Initializing the payment state variable using the useState hook.
   const [payment, setPayment] = useState({
-    paymentMethod:"",
-    paymentDate:"",
-    dueAmount:"",
-    supplier:"",
+    paymentMethod: "",
+    paymentDate: "",
+    dueAmount: "",
+    supplier: "",
   });
 
-// Extracting the id parameter from the URL using the useParams hook.
+  // Extracting the id parameter from the URL using the useParams hook.
   const { id } = useParams();
 
   // Loading the payment details on component mount using the useEffect hook.
@@ -29,46 +29,40 @@ export default function ViewPayment() {
     setPayment(result.data);
   };
 
-    return (
-      <div className="container">
-        <div className="row">
-          <div className="col-md-6 offset-md-3 border rounded p-4 mt-2 shadow">
-            <h2>Payment's Details</h2>
-            <div className="card">
-              <div className="card-header">
-                Details of Payment id : {payment.id}
-                <ul className="list-group list-group-flush">
-                  <li className="list-group-item">
-                    <b>PaymentMethod:</b> 
-                    {payment.paymentMethod}
-                  </li>
-                  <li className="list-group-item">
-                    <b>paymentDate:</b> 
-                    {payment.paymentDate}
-                  </li>
-                  <li className="list-group-item">
-                    <b>Due Amount:</b> 
-                    {payment.dueAmount}
-                  </li>
-                  <li className="list-group-item">
-                    <b>Supplier:</b> 
-                    {payment.supplier}
-                  </li>
-                </ul>
-              </div>
+  return (
+    <div className="container" style={{marginTop: '65px' }}>
+      <div className="row">
+        <div className="col-md-6 offset-md-4 border rounded p-4 mt-2 shadow">
+          <h2>Payment's Details</h2>
+          <div className="card">
+            <div className="card-header">
+              <b>Details of Payment id : {payment.id}</b>
             </div>
-            <Link className="btn btn-outline-primary my-2" to={"/paymentlist"}>
-              Back to PaymentList
-            </Link>
-            <Link
-              className="btn btn-outline-danger mx-2"
-              to={`/editPayment/${payment.id}`}
-            >
-              Edit
-            </Link>
+            <table className="table" style={{ textAlign: "left" }}>
+              <tbody>
+                <tr>
+                  <th>PaymentMethod:</th>
+                  <td>{payment.paymentMethod}</td>
+                </tr>
+                <tr>
+                  <th>paymentDate:</th>
+                  <td>{payment.paymentDate}</td>
+                </tr>
+                <tr>
+                  <th>Supplier:</th>
+                  <td>{payment.supplier}</td>
+                </tr>
+              </tbody>
+            </table>
           </div>
+          <Link className="btn btn-outline-primary my-2" to={"/paymentlist"}>
+            Back to PaymentList
+          </Link>
+          <Link className="btn btn-outline-danger mx-2" to={`/editPayment/${payment.id}`}>
+            Edit
+          </Link>
         </div>
       </div>
-    );
-    
+    </div>
+  );
 }

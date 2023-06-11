@@ -1,32 +1,32 @@
 import axios from 'axios';
 import React, { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom';
-import { CATEGORY_API } from '../../Util';
+import { BRAND_API } from '../../Util';
 
 /**
- * This component will handle the adding category
- * @returns the AddCategory component
+ * This component will handle the adding brand
+ * @returns the AddBrand component
  */
-export default function AddCategory() {
+export default function AddBrand() {
   // Getting navigation functionality from React Router DOM.
   let navigate=useNavigate()
-  const [category, setCategory] = useState({
-    categoryType: "",
+  const [brand, setBrand] = useState({
+    brandName: "",
   });
 
-  // Extracting categoryType from category state.
-  const { categoryType } = category;
+  // Extracting brandName from brand state.
+  const { brandName } = brand;
 
-  // Updating category state whenever there is any input change.
+  // Updating brand state whenever there is any input change.
   const onInputChange = (e) => {
-    setCategory({ ...category, [e.target.name]: e.target.value });
+    setBrand({ ...brandName, [e.target.name]: e.target.value });
   };
 
  // Handling form submission.
   const onSubmit = async (e) => {
     e.preventDefault();
     // Making a POST request to add the new category to the backend.
-      await axios.post(CATEGORY_API, category);
+      await axios.post(BRAND_API, brand);
       navigate("/productlist");
     
   };
@@ -35,18 +35,18 @@ export default function AddCategory() {
     <div className='container'style={{ marginLeft: '100px' , marginTop: '200px' }}>
       <div className='row>'>
         <div className='col-md-8 offset-md-3 border rounded p-4 mt-2 shadow'>
-          <h2 className='text-center m-4'>Add Category</h2>
+          <h2 className='text-center m-4'>Add Brand</h2>
           <form onSubmit={(e) => onSubmit(e)}>
             <div className='mb-3>'>
               <label htmlFor="Name" className="form-lable">
-                Category Type
+                Brand Name
               </label>
               <input
                 type="text"
                 className="form-control"
-                placeholder="Enter category Type"
-                name="categoryType"
-                value={categoryType}
+                placeholder="Enter brand Name"
+                name="brandName"
+                value={brandName}
                 onChange={(e) => onInputChange(e)}
                 required 
                 pattern="^[a-zA-Z0-9 ]+$"

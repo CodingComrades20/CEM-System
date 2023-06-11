@@ -48,24 +48,28 @@ export default function EditPayment() {
 
   // Returning the component.
   return (
-    <div className='container'>
+    <div className='container'style={{ marginLeft: "250px", marginTop: "65px" }}>
       <div className='row'>
         <div className='col-md-6 offset-md-3 border rounded p-4 mt-2 shadow'>
           <h2 className='text-center m-4'>Edit Payment</h2>
           <form onSubmit={(e) => onSubmit(e)}>
-            <div className='mb-3'>
-              <label htmlFor='status' className='form-label'>
-                Status
-              </label>
-              <input
-                type='text'
-                className='form-control'
-                placeholder='Select status'
-                name='status'
-                value={status}
-                onChange={(e) => onInputChange(e)}
-              />
-            </div>
+          <div className='mb-3'>
+            <label htmlFor='' className='form-lable'>
+              Status
+            </label>
+            <select
+              className='form-select'
+              aria-label='Default select example'
+              required
+              name='status'
+              value={status}
+              onChange={(e) => onInputChange(e)}
+            >
+              <option value=''>--Select Status Type-- </option>
+              <option value='paid'>Paid</option>
+              <option value='unpaid'>Unpaid</option>
+            </select>
+          </div>
 
             <div className='mb-3'>
               <label htmlFor='paymentMethod' className='form-label'>
@@ -80,10 +84,10 @@ export default function EditPayment() {
                 onChange={(e) => onInputChange(e)}
               >
                 <option value=''>--Select Payment Method-- </option>
-                <option value='cash'>Cash</option>
-                <option value='checks'>Checks</option>
-                <option value='debit cards'>Debit cards</option>
-                <option value='credit catds'>Credit cards</option>
+                <option value='Cash'>Cash</option>
+                <option value='Check'>Check</option>
+                <option value='Debit card'>Debit card</option>
+                <option value='Credit card'>Credit card</option>
               </select>
             </div>
 

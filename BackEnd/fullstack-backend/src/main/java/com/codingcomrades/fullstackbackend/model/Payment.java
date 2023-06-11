@@ -2,7 +2,10 @@ package com.codingcomrades.fullstackbackend.model;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Email;
 
+import java.time.LocalDate;
+import java.time.ZoneId;
 import java.util.Date;
 
 @Table(name = "payment")
@@ -22,6 +25,11 @@ public class Payment {
     private String paymentMethod;
     private String dueAmount;
     private String supplier;
+
+
+    @Email
+    @Column(name = "customer_email")
+    private String customerEmail;
 
     public Long getId() {
         return id;
@@ -94,6 +102,15 @@ public class Payment {
     public void setSupplier(String supplier) {
         this.supplier = supplier;
     }
+
+    public String getCustomerEmail() {
+        return customerEmail;
+    }
+
+    public void setCustomerEmail(String customerEmail) {
+        this.customerEmail = customerEmail;
+    }
+
 
 
 }

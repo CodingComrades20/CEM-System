@@ -1,8 +1,8 @@
 package com.codingcomrades.fullstackbackend.controller;
-
 import com.codingcomrades.fullstackbackend.exception.PaymentNotFoundException;
 import com.codingcomrades.fullstackbackend.model.Payment;
 import com.codingcomrades.fullstackbackend.repository.PaymentRepository;
+import com.codingcomrades.fullstackbackend.repository.PaymentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -13,10 +13,11 @@ import java.util.List;
 public class PaymentController {
     @Autowired
     private PaymentRepository paymentRepository;
+    private Object paymentService;
 
     @PostMapping("/payment")
     Payment newPayment(@RequestBody Payment newPayment) {
-
+        final PaymentService paymentService;
         return paymentRepository.save(newPayment);
     }
 
@@ -44,6 +45,7 @@ public class PaymentController {
                     payment.setPaymentDate(newPayment.getPaymentDate());
                     payment.setDueAmount(newPayment.getDueAmount());
                     payment.setSupplier(newPayment.getSupplier());
+                    payment.setCustomerEmail(newPayment.getCustomerEmail());
                     return paymentRepository.save(payment);
 
                 }).orElseThrow(() -> new PaymentNotFoundException(id));
@@ -59,6 +61,4 @@ public class PaymentController {
         return "Payment with id " + id + "has been deleted success.";
 
     }
-
-
 }

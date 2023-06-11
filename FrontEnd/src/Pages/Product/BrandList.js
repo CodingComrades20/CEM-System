@@ -1,34 +1,34 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import { CATEGORY_API } from "../../Util";
+import { BRAND_API } from "../../Util";
 
 /**
- * This component will show the category list
- * @returns the Categorylist component
+ * This component will show the brand list
+ * @returns the Brandlist component
  */
-export default function Categorylist() {
-  const [categories, setCategories] = useState([]);
+export default function Brandlist() {
+  const [brands, setBrands] = useState([]);
 
-  // Loading categories on mount.
+  // Loading brands on mount.
   useEffect(() => {
-    loadCategories();
+    loadBrands();
   }, []);
 
-  // Function to load categories
-  const loadCategories = async () => {
-    const result = await axios.get(CATEGORY_API);
-    setCategories(result.data);
+  // Function to load brands
+  const loadBrands = async () => {
+    const result = await axios.get(BRAND_API);
+    setBrands(result.data);
   };
 
 
  // Conformation for delete a record.
-  const deleteCategory = async (id) => {
+  const deleteBrand = async (id) => {
     const confirmDelete = window.confirm(
-      "Are you sure you want to delete this category?"
+      "Are you sure you want to delete this brand?"
     );
     if (confirmDelete) {
-      await axios.delete(`http://localhost:8080/category/${id}`);
-      loadCategories();
+      await axios.delete(`http://localhost:8080/brand/${id}`);
+      loadBrands();
     }
   };
 
@@ -39,21 +39,21 @@ export default function Categorylist() {
           <thead>
             <tr>
               <th scope="col">ID</th>
-              <th scope="col">Category Types</th>
+              <th scope="col">Brand Name</th>
               <th scope="col">Action</th>
             </tr>
           </thead>
           <tbody>
-            {categories.map((categories, index) => (
+            {brands.map((brands, index) => (
               <tr>
                 <th scope="row" key={index}>
                   {index + 1}
                 </th>
-                <td>{categories.categoryType}</td>
+                <td>{brands.brandName}</td>
                 <td>
                   <button
                     className="btn btn-danger mx-2"
-                    onClick={() => deleteCategory(categories.id)}
+                    onClick={() => deleteBrand(brands.id)}
                   >
                     Delete
                   </button>

@@ -23,8 +23,24 @@ public class Product {
 
     private String name;
     private String category;
+
+    private String brand;
+    private String unit;
+
+
+    private String unitValue;
     private Integer Quantity;
     private String price;
+
+    public String getBatchNumber() {
+        return batchNumber;
+    }
+
+    public void setBatchNumber(String batchNumber) {
+        this.batchNumber = batchNumber;
+    }
+
+    private String batchNumber;
     @Temporal(TemporalType.DATE)
     private Date manufactureDate;
     @Temporal(TemporalType.DATE)
@@ -71,6 +87,29 @@ public class Product {
     public void setCategory(String category) {
         this.category = category;
     }
+    public String getBrand() {
+        return brand;
+    }
+
+    public void setBrand(String brand) {
+        this.brand = brand;
+    }
+
+    public String getUnit() {
+        return unit;
+    }
+
+    public void setUnit(String unit) {
+        this.unit = unit;
+    }
+    public String getUnitValue() {
+        return unitValue;
+    }
+
+    public void setUnitValue(String unitValue) {
+        this.unitValue = unitValue;
+    }
+
 
     public Integer getQuantity() {
         return Quantity;

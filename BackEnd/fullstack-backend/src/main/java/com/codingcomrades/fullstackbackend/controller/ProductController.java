@@ -39,10 +39,14 @@ public class ProductController {
                     product.setImage(newProduct.getImage());
                     product.setName(newProduct.getName());
                     product.setCategory(newProduct.getCategory());
+                    product.setBrand(newProduct.getBrand());
                     product.setQuantity(newProduct.getQuantity());
+                    product.setUnit(newProduct.getUnit());
+                    product.setUnitValue(newProduct.getUnitValue());
                     product.setPrice(newProduct.getPrice());
                     product.setManufactureDate(newProduct.getManufactureDate());
                     product.setExpiryDate(newProduct.getExpiryDate());
+                    product.setBatchNumber(newProduct.getBatchNumber());
                     return productRepository.save(product);
 
                 }).orElseThrow(() -> new ProductNotFoundException(id));
