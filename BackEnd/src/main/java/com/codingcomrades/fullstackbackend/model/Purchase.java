@@ -1,8 +1,7 @@
 package com.codingcomrades.fullstackbackend.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
+import com.fasterxml.jackson.annotation.JsonFormat;
+import jakarta.persistence.*;
 
 import java.util.Date;
 
@@ -11,10 +10,13 @@ public class Purchase {
 
     @Id
     @GeneratedValue
+    @JsonFormat(pattern = "yyyy/mm/dd")
+
     private Long id;
     private String purchaseorderid;
     private String supname;
-    private Date date; // Using java.util.Date
+    @Temporal(TemporalType.DATE)
+    private Date date;
     private Long cno;
 
 

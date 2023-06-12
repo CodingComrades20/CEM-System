@@ -1,6 +1,7 @@
 import "./App.css";
 import "../node_modules/bootstrap/dist/css/bootstrap.min.css";
 import Navbar from "./layout/Navbar";
+//import Sidebar from "./components/Sidebar";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import EmpList from "./Pages/Employee/EmployeeList";
 import AddEmp from "./Pages/Employee/AddEmployee";
@@ -35,12 +36,14 @@ import EditPay from "./Pages/Payment/EditPayments"
 import ViewPay from "./Pages/Payment/ViewPayments"
 import PaymentList from "./Pages/Payment/PaymentList"
 
+
 function App() {
   
   return (
     <div className="App">
       <Router>
         <Navbar />
+        
     
         <Routes>
           <Route exact path="/emp" element={<EmpList />} />
