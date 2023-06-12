@@ -20,16 +20,16 @@ function Payment() {
     loadPayment();
 
 
-    const intervalId = setInterval(() => {
-      const currentDate = new Date();
-      if (currentDate.getHours() === 2 && currentDate.getMinutes() === 12) {
-        sendReminderEmail();
-      }
-    }, 60000); // Check every minute
+    // const intervalId = setInterval(() => {
+    //   const currentDate = new Date();
+    //   if (currentDate.getHours() === 2 && currentDate.getMinutes() === 12) {
+    //     sendReminderEmail();
+    //   }
+    // }, 60000); // Check every minute
   
-    return () => {
-      clearInterval(intervalId);
-    };
+    // return () => {
+    //   clearInterval(intervalId);
+    // };
 
 
   }, []);
@@ -66,37 +66,37 @@ function Payment() {
     setFilter(event.target.value);
   };
   
-// Function to send the reminder email.
-const sendReminderEmail = async () => {
-  const currentDate = new Date();
-  const twoDaysBefore = new Date();
-  twoDaysBefore.setDate(currentDate.getDate() - 2);
-
-  const unpaidPayments = payment.filter(
-    (payment) =>
-      payment.status.toLowerCase() === "unpaid" &&
-      new Date(payment.dueDate) <= twoDaysBefore
+// // Function to send the reminder email.
+// const sendReminderEmail = async () => {
 //   const currentDate = new Date();
-// const twoDaysBefore = new Date();
-// twoDaysBefore.setDate(payment.dueDate.getDate() - 2);
+//   const twoDaysBefore = new Date();
+//   twoDaysBefore.setDate(currentDate.getDate() - 2);
 
-// const unpaidPayments = payment.filter(
-//   (payment) =>
-//     payment.status.toLowerCase() === "unpaid" &&
-//     currentDate >= twoDaysBefore
-);
+//   const unpaidPayments = payment.filter(
+//     (payment) =>
+//       payment.status.toLowerCase() === "unpaid" &&
+//       new Date(payment.dueDate) <= twoDaysBefore
+// //   const currentDate = new Date();
+// // const twoDaysBefore = new Date();
+// // twoDaysBefore.setDate(payment.dueDate.getDate() - 2);
+
+// // const unpaidPayments = payment.filter(
+// //   (payment) =>
+// //     payment.status.toLowerCase() === "unpaid" &&
+// //     currentDate >= twoDaysBefore
+// );
 
  
 
-  if (unpaidPayments.length > 0) {
-    try {
-      await axios.post("http://localhost:8080/api/email/send");
-      console.log("Reminder email sent successfully");
-    } catch (error) {
-      console.log("Error sending reminder email:", error);
-    }
-  }
-};
+//   if (unpaidPayments.length > 0) {
+//     try {
+//       await axios.post("http://localhost:8080/api/email/send");
+//       console.log("Reminder email sent successfully");
+//     } catch (error) {
+//       console.log("Error sending reminder email:", error);
+//     }
+//   }
+// };
 
 
 
@@ -126,7 +126,7 @@ const sendReminderEmail = async () => {
         <div className="d-flex justify-content-end mb-2">
         <div className="mx-2">
           <input
-            type="text"
+            type="number"
             placeholder="Search by invoice No"
             onChange={handleSearch}
             className="form-control"

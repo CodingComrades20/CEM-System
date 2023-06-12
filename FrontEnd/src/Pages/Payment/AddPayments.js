@@ -16,27 +16,49 @@ export default function AddPayment() {
     invoiceNo: "",
     status: "",
     dueDate: "",
-    Amount: "",
+    amount: "",
+    customerEmail:"",
     paymentMethod: "",
     paymentDate: "",
-    dueAmount: "",
     supplier: "",
   });
 
   // Destructure the payment state.
-  const { invoiceNo, status, dueDate, Amount, paymentMethod, paymentDate, dueAmount, supplier } = payment;
+  const { invoiceNo, status, dueDate, amount, customerEmail,paymentMethod, paymentDate, supplier } = payment;
 
   // Handle the input change event.
   const onInputChange = (e) => {
     setPayment({ ...payment, [e.target.name]: e.target.value });
   };
 
-  // Handle the form submission event.
-  const onSubmit = async (e) => {
-    e.preventDefault();
-    await axios.post(PAYMENT_API, payment);
-    navigate("/paymentlist");
-  };
+  // //Handle the form submission event.
+  // const onSubmit = async (e) => {
+  //   e.preventDefault();
+  //   await axios.post(PAYMENT_API, payment);
+  //   navigate("/paymentlist");
+  // };
+// Function to handle form submission.
+const onSubmit = async (e) => {
+  e.preventDefault();
+
+  // Check if the status is 'paid' and the payment date or payment method is empty
+  if (status === 'paid' && (paymentDate === '' || paymentMethod === '')) {
+    alert('Payment date and payment method are required for paid status.');
+    return;
+  }
+
+  // Check if the status is 'unpaid' and the payment date or payment method is not empty
+  if (status === 'unpaid' && (paymentDate !== '' || paymentMethod !== '')) {
+    alert('Payment date and payment method should be empty for unpaid status.');
+    return;
+  }
+
+  await axios.post(PAYMENT_API, payment);
+  navigate('/paymentlist');
+};
+
+
+
 
   // Return the component.
   return (
@@ -60,9 +82,10 @@ export default function AddPayment() {
                     onChange={(e) => onInputChange(e)}
                     required
                     pattern="^[0-9]+$"
+                    min="0"
                   />
                 </div>
-                <div className="mb-3">
+                {/* <div className="mb-3">
                   <label htmlFor="Status" className="form-label">
                     Status
                   </label>
@@ -75,7 +98,24 @@ export default function AddPayment() {
                     onChange={(e) => onInputChange(e)}
                     required
                   />
-                </div>
+                </div> */}
+                 <div className='mb-3'>
+            <label htmlFor='' className='form-lable'>
+              Status
+            </label>
+            <select
+              className='form-select'
+              aria-label='Default select example'
+              required
+              name='status'
+              value={status}
+              onChange={(e) => onInputChange(e)}
+            >
+              <option value=''>--Select Status Type-- </option>
+              <option value='paid'>Paid</option>
+              <option value='unpaid'>Unpaid</option>
+            </select>
+          </div>
                 <div className="mb-3">
                   <label htmlFor="DueDate" className="form-lable">
                     Due Date
@@ -86,6 +126,7 @@ export default function AddPayment() {
                     placeholder="Due Date"
                     name="dueDate"
                     value={dueDate}
+                    required
                     onChange={(e) => onInputChange(e)}
                   />
                 </div>
@@ -97,15 +138,30 @@ export default function AddPayment() {
                     type={"number"}
                     className="form-control"
                     placeholder="Amount"
-                    name="Amount"
-                    value={Amount}
+                    name="amount"
+                    value={amount}
                     onChange={(e) => onInputChange(e)}
                     required
                     pattern="^[0-9]+$"
+                    min="0"
                   />
                 </div>
               </div>
               <div className="col-md-6">
+              <div className="mb-3">
+                  <label htmlFor="Email" className="form-lable">
+                    Customer Email Address
+                  </label>
+                  <input
+                    type={"email"}
+                    className="form-control"
+                    placeholder="Email"
+                    name="customerEmail"
+                    value={customerEmail}
+                    onChange={(e) => onInputChange(e)}
+                    required                    
+                  />
+                </div>
                 <div className="mb-3">
                   <label htmlFor="PaymentMethod" className="form-lable">
                     Payment Method
@@ -113,9 +169,9 @@ export default function AddPayment() {
                   <select
                     className="form-select"
                     aria-label="Default select example"
-                    required
                     name="paymentMethod"
                     value={paymentMethod}
+                    required={status === 'paid'}
                     onChange={(e) => onInputChange(e)}
                   >
                     <option value="">--Select Payment Method--</option>
@@ -135,19 +191,7 @@ export default function AddPayment() {
                     placeholder="Payment date"
                     name="paymentDate"
                     value={paymentDate}
-                    onChange={(e) => onInputChange(e)}
-                  />
-                </div>
-                <div className="mb-3">
-                  <label htmlFor="DueAmount" className="form-lable">
-                    Due Amount
-                  </label>
-                  <input
-                    type={"number"}
-                    className="form-control"
-                    placeholder="Due Amount"
-                    name="dueAmount"
-                    value={dueAmount}
+                    required={status === 'paid'}
                     onChange={(e) => onInputChange(e)}
                   />
                 </div>

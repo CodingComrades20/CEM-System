@@ -33,12 +33,51 @@ export default function EditPayment() {
     loadPayment();
   }, []);
 
+  //Function to handle form submission.
+  // const onSubmit = async (e) => {
+  //   e.preventDefault();
+  //   await axios.put(`http://localhost:8080/payment/${id}`, payment);
+  //   navigate('/paymentlist');
+  // };
   // Function to handle form submission.
-  const onSubmit = async (e) => {
-    e.preventDefault();
-    await axios.put(`http://localhost:8080/payment/${id}`, payment);
-    navigate('/paymentlist');
-  };
+// const onSubmit = async (e) => {
+//   e.preventDefault();
+
+//   // Check if the status is 'paid' and the payment date is empty
+//   if (status === 'paid' && paymentDate === '') {
+//     alert('Payment date is required for paid status.');
+//     return;
+//   }
+
+//   // Check if the status is 'unpaid' and the payment date is not empty
+//   if (status === 'unpaid' && paymentDate !== '') {
+//     alert('Payment date should be empty for unpaid status.');
+//     return;
+//   }
+
+//   await axios.put(`http://localhost:8080/payment/${id}`, payment);
+//   navigate('/paymentlist');
+// };
+
+// Function to handle form submission.
+const onSubmit = async (e) => {
+  e.preventDefault();
+
+  // Check if the status is 'paid' and the payment date or payment method is empty
+  if (status === 'paid' && (paymentDate === '' || paymentMethod === '')) {
+    alert('Payment date and payment method are required for paid status.');
+    return;
+  }
+
+  // Check if the status is 'unpaid' and the payment date or payment method is not empty
+  if (status === 'unpaid' && (paymentDate !== '' || paymentMethod !== '')) {
+    alert('Payment date and payment method should be empty for unpaid status.');
+    return;
+  }
+
+  await axios.put(`http://localhost:8080/payment/${id}`, payment);
+  navigate('/paymentlist');
+};
 
   // Function to load the payment details from the server.
   const loadPayment = async () => {
@@ -78,9 +117,9 @@ export default function EditPayment() {
               <select
                 className='form-select'
                 aria-label='Default select example'
-                required
                 name='paymentMethod'
                 value={paymentMethod}
+                //required={status === 'paid'}
                 onChange={(e) => onInputChange(e)}
               >
                 <option value=''>--Select Payment Method-- </option>
@@ -100,12 +139,13 @@ export default function EditPayment() {
                 className='form-control'
                 placeholder='Payment date'
                 name='paymentDate'
+                //required={status === 'paid'}
                 value={paymentDate}
                 onChange={(e) => onInputChange(e)}
               />
             </div>
 
-            <div className='mb-3'>
+            {/* <div className='mb-3'>
               <label htmlFor='dueAmount' className='form-label'>
                 Due Amount
               </label>
@@ -114,10 +154,12 @@ export default function EditPayment() {
                 className='form-control'
                 placeholder='Due Amount'
                 name='dueAmount'
+                required
                 value={dueAmount}
                 onChange={(e) => onInputChange(e)}
+                min="0"
               />
-            </div>
+            </div> */}
 
             <div className='mb-3'>
               <label htmlFor='supplier' className='form-label'>
@@ -131,7 +173,7 @@ export default function EditPayment() {
                 value={supplier}
                 onChange={(e) => onInputChange(e)}
                 required 
-                pattern="^[a-zA-Z0-9 .]+$"
+                pattern="^[a-zA-Z .]+$"
               />
             </div>
 
