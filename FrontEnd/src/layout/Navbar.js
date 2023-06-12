@@ -1,26 +1,84 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React, { useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
+import { Container, Menu, Sidebar, Icon } from 'semantic-ui-react';
 
-export default function Navbar() {
+function Navbar() {
+  const [sidebarVisible, setSidebarVisible] = useState(false);
+  const [adminBoxVisible, setAdminBoxVisible] = useState(false);
+  const navigate = useNavigate();
+
+  const handleToggleSidebar = () => {
+    setSidebarVisible(!sidebarVisible);
+    setAdminBoxVisible(false); // Close the admin box when sidebar is toggled
+  };
+
+  const handleToggleAdminBox = () => {
+    setAdminBoxVisible(!adminBoxVisible);
+  };
+
   return (
-    <div>
-      <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
-        <div className="container-fluid ">
-          <Link className="navbar-brand" to="/">
-            Customer Employee Mangement
-          </Link>
-          
-          <div className="d-flex justify-content-center">
-          <Link className="btn btn-outline-info mx-4" to="/addcustomer">
-            Add Customer
-          </Link>
-          <Link className="btn btn-outline-info mx-2" to="/addsupplier">
-            Add Supplier
-          </Link>
-          </div>
+    <>
+      <Menu inverted color='dark-' stackable size='massive' style={{ borderRadius: 0 }}>
+        <Container>
+          <Menu.Item onClick={handleToggleSidebar}>
+            <Icon name='sidebar' size='large' />
+          </Menu.Item>
+          <Menu.Item header>Customer Employee Management System</Menu.Item>
+          {adminBoxVisible && (
+            <>
+              <Menu.Item as={Link} to='/employee' onClick={handleToggleSidebar}>
+                Employee
+              </Menu.Item>
+              <Menu.Item as={Link} to='/department' onClick={handleToggleSidebar}>
+                Department
+              </Menu.Item>
+            </>
+          )}
+        </Container>
+      </Menu>
 
-        </div>
-      </nav>
-    </div>
+      <Sidebar
+        as={Menu}
+        animation='overlay'
+        icon='labeled'
+        inverted
+        vertical
+        visible={sidebarVisible}
+        width='thin'
+      >
+        <Menu.Item as={Link} to='/' onClick={handleToggleSidebar}>
+          <Icon name='home' />
+          Home
+        </Menu.Item>
+        <Menu.Item as={Link} to='/superadminpage' onClick={handleToggleSidebar}>
+          <Icon name='user' />
+          Super Admin Page
+        </Menu.Item>
+        <Menu.Item as={Link} to='/adminpage' onClick={handleToggleAdminBox}>
+          <Icon name='user' />
+          Admin Page
+        </Menu.Item>
+        <Menu.Item as={Link} to='/financemanagerpage' onClick={handleToggleSidebar}>
+          <Icon name='user' />
+          Finance Manager Page
+        </Menu.Item>
+        <Menu.Item as={Link} to='/userpage' onClick={handleToggleSidebar}>
+          <Icon name='users' />
+          Employee Page
+        </Menu.Item>
+        <Menu.Item as={Link} to='/login' onClick={handleToggleSidebar}>
+          <Icon name='sign-in' />
+          Login
+        </Menu.Item>
+        <Menu.Item as={Link} to='/signup' onClick={handleToggleSidebar}>
+          <Icon name='user plus' />
+          Sign Up
+        </Menu.Item>
+      </Sidebar>
+
+     
+    </>
   );
 }
+
+export default Navbar;

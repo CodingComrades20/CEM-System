@@ -1,13 +1,18 @@
 import axios from "axios";
-import React, { useEffect,useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 
 export default function ViewEmployee() {
   const [employee, setEmployee] = useState({
-    fullname: "",
-    department: "",
-    position: "",
-    contactno:""
+    firstName: '',
+    lastName: '',
+    email: '',
+    phone: '',
+    address: '',
+    city: '',
+    position: '',
+    startDate: '',
+    department: ''
   });
 
   const { id } = useParams();
@@ -17,7 +22,7 @@ export default function ViewEmployee() {
   }, []);
 
   const loadEmployee = async () => {
-    const result = await axios.get(`http://localhost:8080/employee/${id}`);
+    const result = await axios.get(`http://localhost:8081/employee/${id}`);
     setEmployee(result.data);
   };
 
@@ -29,28 +34,48 @@ export default function ViewEmployee() {
 
           <div className="card">
             <div className="card-header">
-              Details of Employee id : {employee.id}
+              Details of employee id : {employee.id}
               <ul className="list-group list-group-flush">
                 <li className="list-group-item">
-                  <b>Name:</b>
-                  {employee.fullname}
+                  <b>First Name:</b>
+                  {employee.firstName}
                 </li>
                 <li className="list-group-item">
-                  <b>Department:</b>
-                  {employee.department}
+                  <b>Last Name:</b>
+                  {employee.lastName}
+                </li>
+                <li className="list-group-item">
+                  <b>Email:</b>
+                  {employee.email}
+                </li>
+                <li className="list-group-item">
+                  <b>Phone:</b>
+                  {employee.phone}
+                </li>
+                <li className="list-group-item">
+                  <b>Address:</b>
+                  {employee.address}
+                </li>
+                <li className="list-group-item">
+                  <b>City:</b>
+                  {employee.city}
                 </li>
                 <li className="list-group-item">
                   <b>Position:</b>
                   {employee.position}
                 </li>
                 <li className="list-group-item">
-                  <b>Contact No:</b>
-                  {employee.contactno}
+                  <b>Start Date:</b>
+                  {employee.startDate}
+                </li>
+                <li className="list-group-item">
+                  <b>Department:</b>
+                  {employee.department}
                 </li>
               </ul>
             </div>
           </div>
-          <Link className="btn btn-primary my-2" to={"/"}>
+          <Link className="btn btn-primary my-2" to={"/employee"}>
             Back to Home
           </Link>
         </div>

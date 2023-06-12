@@ -1,11 +1,8 @@
 import "./App.css";
 import "../node_modules/bootstrap/dist/css/bootstrap.min.css";
-import Navbar from "./layout/Navbar";
-import EmpList from "./Pages/Employee/EmployeeList";
+
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import AddEmp from "./Pages/Employee/AddEmployee";
-import EditEmp from "./Pages/Employee/EditEmployee";
-import ViewEmp from "./Pages/Employee/ViewEmployee";
+
 import AddCustomer from "./Pages/Customer/AddCustomer"
 import EditCustomer from "./Pages/Customer/EditCustomer"
 import ViewCustomer from "./Pages/Customer/ViewCustomer"
@@ -21,18 +18,46 @@ import AddPay from "./Pages/Payment/AddPayments"
 import EditPay from "./Pages/Payment/EditPayments"
 import ViewPay from "./Pages/Payment/ViewPayments"
 import PaymentList from "./Pages/Payment/PaymentList"
+import AddEmployee from "./Pages/Employee/AddEmployee";
+import EditEmployee from "./Pages/Employee/EditEmployee";
+import ViewEmployee from "./Pages/Employee/ViewEmployee";
+import EmployeeList from "./Pages/Employee/EmployeeList";
+
+
+
+import AddDepartment from "./Pages/Department/AddDepartment";
+import DepartmentList from "./Pages/Department/DepartmentList";
+import EditDepartment from "./Pages/Department/EditDepartment";
+import ViewDepartment from "./Pages/Department/ViewDepartment";
+
+import Signup from "./Pages/lpage/Signup";
+import Login from "./Pages/lpage/Login";
+
+import AddOrganization from "./Pages/organization/AddOrganization";
+import EditOrganization from "./Pages/organization/EditOrganization";
+import OrganizationList from "./Pages/organization/OrganizationList";
+import ViewOrganization from "./Pages/organization/ViewOrganization";
+import Navbar from "./layout/Navbar";
+
+
+
+
+
+
 
 function App() {
   return (
     <div className="App">
       <Router>
+        
         <Navbar />
+        
 
         <Routes>
-          <Route exact path="/employee" element={<EmpList />} />
-          <Route exact path="/addEmployee" element={<AddEmp />} />
-          <Route exact path="/editEmployee/:id" element={<EditEmp />} />
-          <Route exact path="/viewEmployee/:id" element={<ViewEmp />} />
+          <Route exact path="/employee" element={<EmployeeList />} />
+          <Route exact path="/addEmployee" element={<AddEmployee />} />
+          <Route exact path="/editEmployee/:id" element={<EditEmployee />} />
+          <Route exact path="/viewEmployee/:id" element={<ViewEmployee />} />
           
           <Route exact path="/viewcustomer/:id" element={<ViewCustomer />} />
           <Route exact path="/editcustomer/:id" element={<EditCustomer />} />
@@ -50,9 +75,29 @@ function App() {
           <Route exact path="/addPay" element={<AddPay/>}/>
           <Route exact path="/editPay" element={<EditPay/>}/>
           <Route exact path="/viewPay" element={<ViewPay/>}/>
+{/*
+          <Route exact path="/Login" element={<Lg/>} />
+          <Route exact path="/Register" element={<Register />} />
+  <Route exact path="/Home" element={<Home />} />*/}
+
+          <Route exact path="/addDepartment" element ={<AddDepartment />} />
+          <Route exact path="/department" element = {<DepartmentList/>}/>
+          <Route exact path="/editdepartment/:id" element = {<EditDepartment />}/>
+          <Route exact path="/viewDepartment/:id" element = {<ViewDepartment />} />
+          <Route exact path="/addOrganization" element={<AddOrganization/>}/>
+          <Route exact path="/editorganization/:id" element={<EditOrganization/>}/>
+          <Route exact path="/organization" element={<OrganizationList/>}/>
+          <Route exact path="/viewOrganization" element={<ViewOrganization />}/>
+
+          <Route exact path="/login" element={<Login />} />
+          <Route exact path="/signup" element={<Signup />} />
+          
+              
+         
           
         </Routes>
       </Router>
+      
     </div>
   );
 }

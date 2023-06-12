@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { Link, useParams } from "react-router-dom";
+import { CUSTOMER_API } from "../../util";
 
 export default function CustomerList() {
   const [customers, setCustomers] = useState([]);
@@ -12,7 +13,7 @@ export default function CustomerList() {
   }, []);
 
   const loadCustomers = async () => {
-    const result = await axios.get("http://localhost:8080/customers");
+    const result = await axios.get("http://localhost:8080/customer");
     setCustomers(result.data);
   };
 
