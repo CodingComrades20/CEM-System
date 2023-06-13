@@ -41,6 +41,7 @@ public class SaleController {
                 .map(sale -> {
                     sale.setSalesorderid(newSale.getSalesorderid());
                     sale.setCusname(newSale.getCusname());
+                    sale.setProductname(newSale.getProductname());
                     sale.setDeliveryaddress(newSale.getDeliveryaddress());
                     sale.setDate(newSale.getDate());
                     sale.setCno(newSale.getCno());

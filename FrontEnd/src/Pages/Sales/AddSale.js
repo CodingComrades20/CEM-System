@@ -20,6 +20,7 @@ export default function AddSale() {
   const Schema = Yup.object({
     salesorderid: Yup.string().required('Required'), // Sales order Id field should not be empty.
     cusname: Yup.string().required('Required'),
+    productname: Yup.string().required('Required'),
     deliveryaddress: Yup.string().required('Required'), // Address field should not be empty.
     date: Yup.date().required('Required').min(new Date(), 'Date must not be in the past'),
     cno: Yup.number().required('Required').positive('Must be a positive number'), // Contact number field should not be empty and should be a positive number.
@@ -34,14 +35,14 @@ export default function AddSale() {
   };
 
   return (
-    <div className="container">
+    <div className="container" style={{marginLeft: '100px' , marginTop: '50px'}}>
       <div className="row">
         <div className="col-md-6 offset-md-3 border rounded p-2 mt-4 shadow">
           <h2 className="text-center m-4"> Add New Sale </h2>
 
           {/* The Formik component initializes the form values and validation schema, and provides a submit handler function. */}
           <Formik
-            initialValues={{ salesorderid: '', cusname: '', deliveryaddress: '', date: '', cno: '' }}
+            initialValues={{ salesorderid: '', cusname: '', productname: '', deliveryaddress: '', date: '', cno: '' }}
             onSubmit={onSubmit}
             validationSchema={Schema}
           >
@@ -76,6 +77,19 @@ export default function AddSale() {
                   <ErrorMessage name="cusname" component="div" className="text-danger" />
                 </div>
 
+                <div className="mb-3">
+                  <label htmlFor="productname" className="form-label">
+                  Product Name
+                  </label>
+                  <Field
+                    type="text"
+                    className="form-control"
+                    placeholder="Enter Product Name"
+                    name="productname"
+                  />
+                  <ErrorMessage name="productname" component="div" className="text-danger" />
+                </div>
+                
                 <div className="mb-3">
                   <label htmlFor="deliveryaddress" className="form-label">
                     Delivery Address

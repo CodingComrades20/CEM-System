@@ -34,7 +34,7 @@ export default function ViewCustomer() {
 
   // render the form.
   return (
-    <div className="container">
+    <div className="container" style={{ marginTop: '80px'}}>
       <div className="row">
         <div className="col-md-6 offset-md-3 border rounded p-2 mt-4 shadow">
           <h2 className="text-center m-4">Customer's Details</h2>

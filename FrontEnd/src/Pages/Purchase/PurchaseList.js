@@ -22,7 +22,7 @@ export default function PurchaseList() {
     loadPurchases();
   }, []);
 
-  // retrieves the list of sales from the server.
+  // retrieves the list of purchase from the server.
   const loadPurchases = async () => {
     const result = await axios.get(PURCHASES_API);
     setPurchases(result.data);
@@ -39,7 +39,7 @@ export default function PurchaseList() {
 
   // renders the purchase list as a table.
   return (
-    <div className="container">
+    <div className="container" style={{marginLeft: '220px' , marginTop: '80px'}}>
       <div className="py-4">
         <table className="table border shadow">
           <thead>
@@ -50,6 +50,7 @@ export default function PurchaseList() {
               <th scope="col">Seriel No</th>
               <th scope="col">Purchase Order Id</th>
               <th scope="col">Supplier Name</th>
+              <th scope="col">Product Name</th>
               <th scope="col">Delivered Date </th>
               <th scope="col">Contact No</th>
               <th scope="col">Action</th>
@@ -63,10 +64,9 @@ export default function PurchaseList() {
                 </th>
                 <td>{purchase.purchaseorderid}</td>
                 <td>{purchase.supname}</td>
-                <td>{purchase.deliveryaddress}</td>
+                <td>{purchase.productname}</td>
                 <td>{purchase.date}</td>
-                <td>{purchase.cno}</td>
-                              
+                <td>{purchase.cno}</td>             
                 <td>
 
                   {/* Link to view purchase details */}

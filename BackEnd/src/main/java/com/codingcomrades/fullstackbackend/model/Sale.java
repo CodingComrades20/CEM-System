@@ -17,8 +17,8 @@ public class Sale {
     private Long id;
     private String salesorderid;
     private String cusname;
+    private String productname;
     private String deliveryaddress;
-
 
     @Temporal(TemporalType.DATE)
     private Date date;
@@ -46,6 +46,14 @@ public class Sale {
 
     public void setCusname(String cusname) {
         this.cusname = cusname;
+    }
+
+    public String getProductname() {
+        return productname;
+    }
+
+    public void setProductname(String productname) {
+        this.productname = productname;
     }
 
     public String getDeliveryaddress() {

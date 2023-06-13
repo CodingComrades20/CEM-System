@@ -39,7 +39,7 @@ export default function SaleList() {
 
   // renders the sales list as a table.
   return (
-    <div className="container">
+    <div className="container" style={{marginLeft: '220px' , marginTop: '80px'}}>
       <div className="py-4">
         <table className="table border shadow">
           <thead>
@@ -50,7 +50,8 @@ export default function SaleList() {
               <th scope="col">Seriel No</th>
               <th scope="col">Sales Order Id</th>
               <th scope="col">Customer Name</th>
-              <th scope="col">Delivery Address No</th>
+              <th scope="col">Product Name</th>
+              <th scope="col">Delivery Address</th>
               <th scope="col">Delivered Date </th>
               <th scope="col">Contact No</th>
               <th scope="col">Action</th>
@@ -64,6 +65,7 @@ export default function SaleList() {
                 </th>
                 <td>{sale.salesorderid}</td>
                 <td>{sale.cusname}</td>
+                <td>{sale.productname}</td>
                 <td>{sale.deliveryaddress}</td>
                 <td>{sale.date}</td>
                 <td>{sale.cno}</td>

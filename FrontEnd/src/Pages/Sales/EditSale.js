@@ -21,6 +21,7 @@ export default function EditSale() {
   const [sale, setSale] = useState({
     salesorderid: "",
     cusname: "",
+    productname: "",
     deliveryaddress: "",
     date:"",
     cno: "",
@@ -28,7 +29,7 @@ export default function EditSale() {
   });
 
   // destructuring the state.
-  const { salesorderid, cusname, deliveryaddress, date, cno } = sale;
+  const { salesorderid, cusname, productname, deliveryaddress, date, cno } = sale;
 
   // handle input changes.
   const onInputChange = (e) => {
@@ -55,7 +56,7 @@ export default function EditSale() {
 
   // render the form.
   return (
-    <div className="container">
+    <div className="container" style={{ marginTop: '55px'}}>
       <div className="row">
         <div className="col-md-6 offset-md-3 border rounded p-4 mt-2 shadow">
           <h2 className="text-center m-4">Edit Sales Details</h2>
@@ -84,6 +85,19 @@ export default function EditSale() {
                 placeholder="Enter Customer's Name"
                 name="cusname"
                 value={cusname}
+                onChange={(e) => onInputChange(e)}
+              />
+            </div>
+            <div className="mb-3">
+              <label htmlFor="productname" className="form-label">
+              Product Name
+              </label>
+              <input
+                type={"text"}
+                className="form-control"
+                placeholder="Enter product's Name"
+                name="productname"
+                value={productname}
                 onChange={(e) => onInputChange(e)}
               />
             </div>

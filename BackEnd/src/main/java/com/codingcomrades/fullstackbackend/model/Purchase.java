@@ -15,6 +15,8 @@ public class Purchase {
     private Long id;
     private String purchaseorderid;
     private String supname;
+
+    private String productname;
     @Temporal(TemporalType.DATE)
     private Date date;
     private Long cno;
@@ -43,6 +45,14 @@ public class Purchase {
 
     public void setSupname(String supname) {
         this.supname = supname;
+    }
+
+    public String getProductname() {
+        return productname;
+    }
+
+    public void setProductname(String productname) {
+        this.productname = productname;
     }
 
     public Date getDate() {

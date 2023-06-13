@@ -20,7 +20,7 @@ export default function AddPurchase() {
   const Schema = Yup.object({
     purchaseorderid: Yup.string().required('Required'), // Purchase order Id field should not be empty.
     supname: Yup.string().required('Required'),
-   // deliveryaddress: Yup.string().required('Required'), // Address field should not be empty.
+    productname: Yup.string().required('Required'),
     date: Yup.date().required('Required').min(new Date(), 'Date must not be in the past'),
     cno: Yup.number().required('Required').positive('Must be a positive number'), // Contact number field should not be empty and should be a positive number.
 
@@ -34,14 +34,14 @@ export default function AddPurchase() {
   };
 
   return (
-    <div className="container">
+    <div className="container" style={{marginLeft: '100px' , marginTop: '100px'}}>
       <div className="row">
         <div className="col-md-6 offset-md-3 border rounded p-2 mt-4 shadow">
           <h2 className="text-center m-4"> Add New Purchase </h2>
 
           {/* The Formik component initializes the form values and validation schema, and provides a submit handler function. */}
           <Formik
-            initialValues={{ purchaseorderid: '', supname: '', date: '', cno: '' }}
+            initialValues={{ purchaseorderid: '', supname: '', productname: '', date: '', cno: '' }}
             onSubmit={onSubmit}
             validationSchema={Schema}
           >
@@ -77,6 +77,19 @@ export default function AddPurchase() {
                 </div>
 
                 <div className="mb-3">
+                  <label htmlFor="productname" className="form-label">
+                  Product Name
+                  </label>
+                  <Field
+                    type="text"
+                    className="form-control"
+                    placeholder="Enter Product Name"
+                    name="productname"
+                  />
+                  <ErrorMessage name="productname" component="div" className="text-danger" />
+                </div>
+
+                <div className="mb-3">
                   <label htmlFor="date" className="form-label">
                   Date
                   </label>
@@ -96,7 +109,7 @@ export default function AddPurchase() {
                   <Field
                     type="number"
                     className="form-control"
-                    placeholder="Enter Customer's Contact Number"
+                    placeholder="Enter Supplier's Contact Number"
                     name="cno"
                   />
                   <ErrorMessage name="cno" component="div" className="text-danger" />

@@ -14,6 +14,7 @@ export default function ViewSale() {
   const [sale, setSale] = useState({
     salesorderid: "",
     cusname: "",
+    productname:"",
     deliveryaddress: "",
     date:"",
     cno: "",
@@ -35,7 +36,7 @@ export default function ViewSale() {
 
   // render the form.
   return (
-    <div className="container">
+    <div className="container" style={{ marginTop: '80px'}}>
       <div className="row">
         <div className="col-md-6 offset-md-3 border rounded p-2 mt-4 shadow">
           <h2 className="text-center m-4">Sales Details</h2>
@@ -51,6 +52,10 @@ export default function ViewSale() {
                 <li className="list-group-item my-2">
                   <b>Customer Name:</b>
                   {sale.cusname}
+                </li>
+                <li className="list-group-item my-2">
+                  <b>Product Name:</b>
+                  {sale.productname}
                 </li>
                 <li className="list-group-item my-2">
                   <b>Delivery Address:</b>

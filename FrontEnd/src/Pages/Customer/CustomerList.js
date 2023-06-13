@@ -39,7 +39,7 @@ export default function CustomerList() {
 
   // renders the customer list as a table.
   return (
-    <div className="container">
+    <div className="container" style={{marginLeft: '220px' , marginTop: '80px'}}>
       <div className="py-4">
         <table className="table border shadow">
           <thead>

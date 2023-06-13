@@ -1,7 +1,7 @@
 import "./App.css";
 import "../node_modules/bootstrap/dist/css/bootstrap.min.css";
-import Navbar from "./layout/Navbar";
-//import Sidebar from "./components/Sidebar";
+//import Navbar from "./layout/Navbar";
+import Sidebar from "./Pages/components/Sidebar";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import EmpList from "./Pages/Employee/EmployeeList";
 import AddEmp from "./Pages/Employee/AddEmployee";
@@ -42,8 +42,9 @@ function App() {
   return (
     <div className="App">
       <Router>
-        <Navbar />
         
+        <Sidebar />
+        <div></div>
     
         <Routes>
           <Route exact path="/emp" element={<EmpList />} />

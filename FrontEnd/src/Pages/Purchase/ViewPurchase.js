@@ -10,15 +10,16 @@ import { Link, useParams } from "react-router-dom";
 
 export default function ViewPurchase() {
   
-  // State to hold the sale data.
+  // State to hold the purchase data.
   const [purchase, setPurchase] = useState({
     purchaseorderid: "",
     supname: "",
+    productname:"",
     date:"",
     cno: "",
   });
 
-  // Get the sale ID from the URL using the useParams hook.
+  // Get the purchase ID from the URL using the useParams hook.
   const { id } = useParams();
 
   // Load the purchase data from the server using axios.
@@ -34,7 +35,7 @@ export default function ViewPurchase() {
 
   // render the form.
   return (
-    <div className="container">
+    <div className="container" style={{ marginTop: '80px'}}>
       <div className="row">
         <div className="col-md-6 offset-md-3 border rounded p-2 mt-4 shadow">
           <h2 className="text-center m-4">Purchase Details</h2>
@@ -51,7 +52,10 @@ export default function ViewPurchase() {
                   <b>Supplier Name:</b>
                   {purchase.supname}
                 </li>
-            
+                <li className="list-group-item my-2">
+                  <b>Product Name:</b>
+                  {purchase.productname}
+                </li>
                 <li className="list-group-item my-2">
                   <b>Delivered date:</b>
                   {purchase.date}

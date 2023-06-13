@@ -21,20 +21,21 @@ export default function EditPurchase() {
   const [purchase, setPurchase] = useState({
     purchaseorderid: "",
     supname: "",
+    productname: "",
     date:"",
     cno: "",
     
   });
 
   // destructuring the state.
-  const { purchaseorderid, supname, date, cno } = purchase;
+  const { purchaseorderid, supname, productname, date, cno } = purchase;
 
   // handle input changes.
   const onInputChange = (e) => {
-    setPurchase({ ...sale, [e.target.name]: e.target.value });
+    setPurchase({ ...purchase, [e.target.name]: e.target.value });
   };
 
- // load the sale data from the server.
+ // load the purchase data from the server.
   useEffect(() => {
     loadPurchase();
   }, []);
@@ -46,7 +47,7 @@ export default function EditPurchase() {
     navigate("/purchaselist");
   };
 
-  // fetch the sale data from the server and update the state.
+  // fetch the purchase data from the server and update the state.
   const loadPurchase= async () => {
     const result = await axios.get(`http://localhost:8080/purchase/${id}`);
     setPurchase(result.data);
@@ -54,7 +55,7 @@ export default function EditPurchase() {
 
   // render the form.
   return (
-    <div className="container">
+    <div className="container"style={{ marginTop: '80px'}}>
       <div className="row">
         <div className="col-md-6 offset-md-3 border rounded p-4 mt-2 shadow">
           <h2 className="text-center m-4">Edit Purchases Details</h2>
@@ -86,7 +87,19 @@ export default function EditPurchase() {
                 onChange={(e) => onInputChange(e)}
               />
             </div>
-            
+            <div className="mb-3">
+              <label htmlFor="productname" className="form-label">
+              Product Name
+              </label>
+              <input
+                type={"text"}
+                className="form-control"
+                placeholder="Enter product's Name"
+                name="productname"
+                value={productname}
+                onChange={(e) => onInputChange(e)}
+              />
+            </div>
             <div className="mb-3">
               <label htmlFor="date" className="form-label">
               Delivered Date

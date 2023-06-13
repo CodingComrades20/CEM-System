@@ -32,7 +32,7 @@ export default function AddSupplier() {
   };
 
   return (
-    <div className="container">
+    <div className="container" style={{marginLeft: '100px' , marginTop: '100px'}}>
       <div className="row">
         <div className="col-md-6 offset-md-3 border rounded p-2 mt-4 shadow">
           <h2 className="text-center m-4"> Add New Supplier </h2>

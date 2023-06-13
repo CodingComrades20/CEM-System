@@ -42,6 +42,7 @@ public class PurchaseController {
                 .map(purchase -> {
                     purchase.setPurchaseorderid(newPurchase.getPurchaseorderid());
                     purchase.setSupname(newPurchase.getSupname());
+                    purchase.setProductname(newPurchase.getProductname());
                     purchase.setDate(newPurchase.getDate());
                     purchase.setCno(newPurchase.getCno());
 
