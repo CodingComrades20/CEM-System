@@ -19,33 +19,10 @@ export default function AddProduct() {
     expiryDate: '',
   });
 
-  const { image, name, category,brand,unit, quantity, price,unitValue } = product;
+  const { name, category,brand,unit, quantity, price,unitValue } = product;
   const [manufactureDate, setManufactureDate] = useState('');
   const [expiryDate, setExpiryDate] = useState('');
   const [selectedFile, setSelectedFile] = useState(null);
-
-
-
-  const [batchNumber, setBatchNumber] = useState(1);
-
-
-  // const onInputChange = (e) => {
-  //   const { name, value } = e.target;
-  //   if (name === 'manufactureDate') {
-  //     setManufactureDate(value);
-  //     if (expiryDate && value > expiryDate) {
-  //       setExpiryDate('');
-  //     }
-  //   } else {
-  //     if (manufactureDate && value < manufactureDate) {
-  //       alert('Expiry date cannot be earlier than manufacture date');
-  //     } else {
-  //       setExpiryDate(value);
-  //     }
-  //   }
-  //   setProduct({ ...product, [name]: value });
-  // };
-
   const onInputChange = (e) => {
     const { name, value } = e.target;
   
@@ -71,13 +48,6 @@ export default function AddProduct() {
   
     setProduct({ ...product, [name]: value });
   };
-  
-
-
-
-
-
-
   const onSubmit = async (e) => {
     e.preventDefault();
     await axios.post(PRODUCT_API, product);
@@ -90,13 +60,7 @@ export default function AddProduct() {
     navigate('/productlist');
   };
 
-
-
-
-
-
-  
-  const [options, setOptions] = useState([]);
+ const [options, setOptions] = useState([]);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -253,8 +217,6 @@ export default function AddProduct() {
                     pattern="^[0-9]+$"
                   />
                 </div>
-
-
               <div className="mb-3">
                   <label htmlFor="Brand" className="form-label">
                     Select Brand

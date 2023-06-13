@@ -1,5 +1,5 @@
 import axios from 'axios';
-import React, { useState } from 'react';
+import React, { useState,useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { PAYMENT_API } from '../../Util';
 
@@ -23,6 +23,10 @@ export default function AddPayment() {
     supplier: "",
   });
 
+  const [existingInvoiceNumbers, setExistingInvoiceNumbers] = useState([]);
+
+
+
   // Destructure the payment state.
   const { invoiceNo, status, dueDate, amount, customerEmail,paymentMethod, paymentDate, supplier } = payment;
 
@@ -38,8 +42,37 @@ export default function AddPayment() {
   //   navigate("/paymentlist");
   // };
 // Function to handle form submission.
+
+useEffect(() => {
+  fetchExistingInvoiceNumbers();
+}, []);
+
+const fetchExistingInvoiceNumbers = async () => {
+  try {
+    const response = await axios.get(PAYMENT_API);
+    const payments = response.data;
+    const invoiceNumbers = payments.map((payment) => payment.invoiceNo);
+    setExistingInvoiceNumbers(invoiceNumbers);
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+
+
 const onSubmit = async (e) => {
   e.preventDefault();
+  const currentDate = new Date().toISOString().split('T')[0];
+  if (paymentDate > currentDate) {
+    alert('Payment date cannot be after the current date.');
+    return;
+  }
+
+
+  if (existingInvoiceNumbers.includes(invoiceNo)) {
+    alert("Invoice number already exists. Cannot add duplicate entry.");
+    return;
+  }
 
   // Check if the status is 'paid' and the payment date or payment method is empty
   if (status === 'paid' && (paymentDate === '' || paymentMethod === '')) {

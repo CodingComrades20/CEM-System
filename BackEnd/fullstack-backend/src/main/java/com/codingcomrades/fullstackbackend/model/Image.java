@@ -45,6 +45,6 @@ public class Image {
     public void setData(byte[] data) {
         this.data = data;
     }
-    // getters and setters
+
 }
 

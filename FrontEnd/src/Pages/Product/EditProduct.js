@@ -1,5 +1,3 @@
-// 
-
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { Link, useNavigate, useParams } from 'react-router-dom';
@@ -25,25 +23,6 @@ export default function EditProduct() {
   const [manufactureDate, setManufactureDate] = useState('');
   const [expiryDate, setExpiryDate] = useState('');
   const [selectedFile, setSelectedFile] = useState(null);
-
-  // const onInputChange = (e) => {
-  //   const { name, value } = e.target;
-  //   if (name === 'manufactureDate') {
-  //     setManufactureDate(value);
-  //     if (expiryDate && value > expiryDate) {
-  //       setExpiryDate('');
-  //     }
-  //   } else if (name === 'category') {
-  //     setProduct({ ...product, category: value });
-  //   } else {
-  //     if (manufactureDate && value < manufactureDate) {
-  //       alert('Expiry date cannot be earlier than manufacture date');
-  //     } else {
-  //       setExpiryDate(value);
-  //     }
-  //     setProduct({ ...product, [name]: value });
-  //   }
-  // };
   const onInputChange = (e) => {
     const { name, value } = e.target;
   
@@ -295,7 +274,7 @@ export default function EditProduct() {
                     className="form-control"
                     placeholder="Enter manufacture date"
                     name="manufactureDate"
-                    value={manufactureDate}
+                    value={product.manufactureDate}
                     onChange={(e) => onInputChange(e)}
                   />
                 </div>
@@ -308,7 +287,7 @@ export default function EditProduct() {
                     className="form-control"
                     placeholder="Expiry date"
                     name="expiryDate"
-                    value={expiryDate}
+                    value={product.expiryDate}
                     onChange={(e) => onInputChange(e)}
                   />
                 </div>

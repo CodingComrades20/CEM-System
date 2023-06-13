@@ -1,18 +1,12 @@
 package com.codingcomrades.fullstackbackend.model;
-
 import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.persistence.*;
-
 import java.util.Date;
 
 @Entity
-
-
 @Table(name = "product")
 
 public class Product {
-
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @JsonFormat(pattern = "yyyy/MM/dd")
@@ -20,14 +14,10 @@ public class Product {
     private Long id;
     @Lob
     private byte[] image;
-
     private String name;
     private String category;
-
     private String brand;
     private String unit;
-
-
     private String unitValue;
     private Integer Quantity;
     private String price;

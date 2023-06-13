@@ -22,17 +22,15 @@ import AddCategory from "./Pages/Product/AddCategory"
 import Categorylist from "./Pages/Product/CategoryList";
 import AddBrand from "./Pages/Product/AddBrand"
 import Brandlist from "./Pages/Product/BrandList";
-import ImageUpload from "./Pages/Product/Image/Image";
-import ImageDisplay from "./Pages/Product/Image/ImageDisplay";
-import Delete from "./Pages/Product/Image/imageDelete";
+// import ImageUpload from "./Pages/Product/Image/Image";
+// import ImageDisplay from "./Pages/Product/Image/ImageDisplay";
+// import Delete from "./Pages/Product/Image/imageDelete";
 function App() {
   return (
     <div className="App">
       <Router>
-        {/* <Navbar /> */}
         <Sidebar />
         <div>
-
     </div>
         <Routes>
 
