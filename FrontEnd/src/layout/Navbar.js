@@ -5,25 +5,32 @@ import { Container, Menu, Sidebar, Icon } from 'semantic-ui-react';
 function Navbar() {
   const [sidebarVisible, setSidebarVisible] = useState(false);
   const [adminBoxVisible, setAdminBoxVisible] = useState(false);
+  const [superAdminBoxVisible, setSuperAdminBoxVisible] = useState(false)
   const navigate = useNavigate();
 
   const handleToggleSidebar = () => {
     setSidebarVisible(!sidebarVisible);
     setAdminBoxVisible(false); // Close the admin box when sidebar is toggled
+    setSuperAdminBoxVisible(false);
+    
   };
 
   const handleToggleAdminBox = () => {
     setAdminBoxVisible(!adminBoxVisible);
+  };
+  const handleToggleSuperAdminBox = () => {
+    setSuperAdminBoxVisible(!adminBoxVisible);
   };
 
   return (
     <>
       <Menu inverted color='dark-' stackable size='massive' style={{ borderRadius: 0 }}>
         <Container>
+        <Menu.Item header>Customer Employee Management System</Menu.Item>
           <Menu.Item onClick={handleToggleSidebar}>
             <Icon name='sidebar' size='large' />
           </Menu.Item>
-          <Menu.Item header>Customer Employee Management System</Menu.Item>
+          
           {adminBoxVisible && (
             <>
               <Menu.Item as={Link} to='/employee' onClick={handleToggleSidebar}>
@@ -33,9 +40,20 @@ function Navbar() {
                 Department
               </Menu.Item>
             </>
+          )},
+          {superAdminBoxVisible && (
+            <>
+            <Menu.Item as={Link} to='/organization' onClick={handleToggleSidebar}>
+                Organization
+              </Menu.Item>
+              <Menu.Item as={Link} to='/admin' onClick={handleToggleSidebar}>
+                Admin
+              </Menu.Item>
+            </>
           )}
         </Container>
       </Menu>
+     
 
       <Sidebar
         as={Menu}
@@ -50,7 +68,7 @@ function Navbar() {
           <Icon name='home' />
           Home
         </Menu.Item>
-        <Menu.Item as={Link} to='/superadminpage' onClick={handleToggleSidebar}>
+        <Menu.Item as={Link} to='/superadminpage' onClick={handleToggleSuperAdminBox}>
           <Icon name='user' />
           Super Admin Page
         </Menu.Item>

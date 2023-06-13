@@ -6,6 +6,7 @@ export default function EmployeeList() {
   const [employees, setEmployees] = useState([]);
   const [searchTerm, setSearchTerm] = useState('');
   const [searchResults, setSearchResults] = useState([]);
+  const [sortConfig, setSortConfig] = useState({ key: '', direction: '' });
 
   useEffect(() => {
     loadEmployees();
@@ -48,6 +49,34 @@ export default function EmployeeList() {
     setSearchTerm(value);
   };
 
+  const handleSortChange = event => {
+    const { value } = event.target;
+    const [key, direction] = value.split(':');
+    setSortConfig({ key, direction });
+  };
+
+  const sortedEmployees = [...searchResults].sort((a, b) => {
+    if (sortConfig.direction === 'ascending') {
+      if (a[sortConfig.key] < b[sortConfig.key]) {
+        return -1;
+      }
+      if (a[sortConfig.key] > b[sortConfig.key]) {
+        return 1;
+      }
+      return 0;
+    } else if (sortConfig.direction === 'descending') {
+      if (a[sortConfig.key] > b[sortConfig.key]) {
+        return -1;
+      }
+      if (a[sortConfig.key] < b[sortConfig.key]) {
+        return 1;
+      }
+      return 0;
+    } else {
+      return 0;
+    }
+  });
+
   return (
     <div className="container">
       <div className="py-4" style={{ marginTop: '50px' }}>
@@ -66,6 +95,19 @@ export default function EmployeeList() {
             value={searchTerm}
             onChange={handleSearchChange}
           />
+          <select className="form-select" onChange={handleSortChange}>
+            <option value="">Sort By</option>
+            <option value="firstName:ascending">First Name Ascending</option>
+            <option value="firstName:descending">First Name Descending</option>
+            <option value="lastName:ascending">Last Name Ascending</option>
+            <option value="lastName:descending">Last Name Descending</option>
+            <option value="email:ascending">Email Ascending</option>
+            <option value="email:descending">Email Descending</option>
+            <option value="phone:ascending">Phone Ascending</option>
+            <option value="phone:descending">Phone Descending</option>
+            <option value="city:ascending">City Ascending</option>
+            <option value="city:descending">City Descending</option>
+          </select>
         </div>
         <div className="employee-list-wrapper" style={{ display: 'flex', justifyContent: 'flex-end' }}>
           <table className="table border shadow">
@@ -80,7 +122,7 @@ export default function EmployeeList() {
               </tr>
             </thead>
             <tbody>
-              {searchResults.map((employee, index) => (
+              {sortedEmployees.map((employee, index) => (
                 <tr key={employee.id}>
                   <th scope="row">{employee.id}</th>
                   <td>
